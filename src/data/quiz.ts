@@ -58,7 +58,7 @@ export const personalityTypes: PersonalityType[] = [
     title: 'The Builder',
     description: 'Structured, goal-driven, performance-oriented.',
     macroSplit: { protein: 40, carbs: 30, fat: 30 },
-    message: 'You thrive when you hit high protein consistently — Alma can make it effortless.'
+    message: 'You need 1.2-1.6g protein per pound of body weight. Your structured approach means you can hit this consistently - most people can\'t. Pre and post-workout nutrition is your secret weapon for maximizing muscle protein synthesis.'
   },
   {
     id: 'lean-seeker',
@@ -66,7 +66,7 @@ export const personalityTypes: PersonalityType[] = [
     title: 'The Lean Seeker',
     description: 'Disciplined, focused on body composition.',
     macroSplit: { protein: 35, carbs: 25, fat: 40 },
-    message: 'Lower carb and higher fat helps you feel full and steady while you cut.'
+    message: 'Higher fat keeps you satisfied longer and prevents the 3pm snack attack that derails most diets. Save carbs for around workouts when your body uses them efficiently. Your disciplined nature can handle daily weight fluctuations most people can\'t.'
   },
   {
     id: 'energizer',
@@ -74,7 +74,7 @@ export const personalityTypes: PersonalityType[] = [
     title: 'The Energizer',
     description: 'Balanced, cares about energy and mental clarity.',
     macroSplit: { protein: 30, carbs: 40, fat: 30 },
-    message: 'Carbs are your fuel — Alma helps you balance them with enough protein for stability.'
+    message: 'You actually need those carbs for brain function and energy. Eat carbs with your first meal and around workouts to maintain steady blood sugar and prevent energy crashes. If you\'re hitting protein and feeling energized, you\'re winning.'
   },
   {
     id: 'harmonizer',
@@ -82,7 +82,7 @@ export const personalityTypes: PersonalityType[] = [
     title: 'The Harmonizer',
     description: 'Flexible, wellness-oriented, enjoys variety.',
     macroSplit: { protein: 30, carbs: 35, fat: 35 },
-    message: 'You value balance and sustainability. Alma keeps you on track without restriction.'
+    message: 'This balanced split means no food is off-limits. You can have pizza Friday and hit your macros - most rigid dieters can\'t. Use the 80/20 rule: hit your targets 80% of the time and don\'t stress the other 20%. Your balanced approach makes this sustainable long-term.'
   }
 ];
 

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alma Food</title>
+    
+    <!-- Alma Rich Sharing Meta Tags -->
+    <meta property="og:title" content="Check out this food in Alma" />
+    <meta property="og:description" content="Discover nutrition info, track your meals, and share healthy choices with friends." />
+    <meta property="og:image" content="https://deeplink.alma.food/img/alma-sharing-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://deeplink.alma.food/food/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Alma" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Check out this food in Alma" />
+    <meta name="twitter:description" content="Discover nutrition info, track your meals, and share healthy choices with friends." />
+    <meta name="twitter:image" content="https://deeplink.alma.food/img/alma-sharing-card.png" />
+    <meta name="twitter:site" content="@almafoodapp" />
+    <meta name="description" content="Discover nutrition info, track your meals, and share healthy choices with friends." />
+    
+    <!-- App Clip Meta Tags -->
+    <meta name="apple-itunes-app" content="app-id=6736377919, app-clip-bundle-id=com.alma.alma-app-debug.AlmaAppClip">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Alma Food">
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="../fonts/HALFourGrotesk-Regular.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="../fonts/HALFourGrotesk-Medium.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="../fonts/HALFourGrotesk-Bold.otf" as="font" type="font/otf" crossorigin>
+    
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+    <!-- Full bleed food image -->
+    <div class="hero-section">
+      <img 
+        id="recipe-hero-image" 
+        class="hero-image" 
+        alt="Food image"
+        fetchpriority="high"
+        width="800"
+        height="480"
+        style="object-fit: cover; width: 100%; height: 240px; background-color: #f3f4f6;"
+      />
+      <div class="hero-gradient"></div>
+    </div>
+
+    <!-- Main content -->
+    <div class="container">
+      <div class="main-content">
+      <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading food...</p>
+        <p id="debug-info" style="font-size: 12px; color: #666; margin-top: 10px;">Debug info will appear here</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="error" class="error-container hidden">
+        <div class="error-content">
+          <div class="error-emoji">🍎</div>
+          <h2 class="error-title">Food not found.</h2>
+          <p class="error-description">This shared food has been removed or the link is invalid.</p>
+        </div>
+      </div>
+
+      <div id="recipe-content" class="hidden">
+        
+        <!-- Food Title Section -->
+        <div class="recipe-header">
+          <h1 id="recipe-title" class="recipe-title"></h1>
+          <div id="recipe-creator" class="recipe-brand hidden">
+            <div id="creator-avatar" class="brand-avatar"></div>
+            by <span id="creator-name" class="recipe-brand-name"></span>
+          </div>
+        </div>
+
+        <!-- Macros Card -->
+        <div class="macros-card">
+          <div class="macros-section">
+            <div class="macro-item">
+              <div class="macro-label">Cals</div>
+              <div id="macro-calories" class="macro-value">-</div>
+            </div>
+            <div class="macro-item">
+              <div class="macro-label">Protein</div>
+              <div class="macro-value-with-icon">
+                <span class="macro-icon protein-icon">P</span>
+                <span id="macro-protein" class="macro-value">-</span>
+              </div>
+            </div>
+            <div class="macro-item">
+              <div class="macro-label">Carbs</div>
+              <div class="macro-value-with-icon">
+                <span class="macro-icon carbs-icon">C</span>
+                <span id="macro-carbs" class="macro-value">-</span>
+              </div>
+            </div>
+            <div class="macro-item">
+              <div class="macro-label">Fat</div>
+              <div class="macro-value-with-icon">
+                <span class="macro-icon fat-icon">F</span>
+                <span id="macro-fat" class="macro-value">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ingredients Section -->
+        <div id="ingredients-header-container" class="ingredients-header-container hidden">
+          <div class="section-header">
+              <h2 class="section-title">Ingredients</h2>
+              <span id="ingredients-count" class="section-count"></span>
+            </div>
+          <div class="serves-card">
+            <span class="portion-label" style="font-weight:600;">Portion:</span>
+            <span class="serves-text"></span>
+          </div>
+        </div>
+        <div id="ingredients-section" class="section-card section-card-ingredients hidden">
+          <div id="ingredients-list"></div>
+        </div>
+
+        <!-- Nutrition Facts Section -->
+        <div class="section-header">
+            <h2 class="section-title">Nutrition Facts</h2>
+          </div>
+        <div id="nutrition-section" class="section-card section-card-nutrition">   
+          <div class="nutrition-facts">
+            <div class="nutrition-row">
+              <span class="nutrition-label">Calories</span>
+              <div class="nutrition-amount">
+                <span id="nutrition-calories" class="nutrition-amount-value">-</span>
+              </div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-label">Total Fat</span>
+              <div class="nutrition-amount">
+                <span id="nutrition-fat" class="nutrition-amount-value">-</span>
+                <span class="nutrition-amount-unit">g</span>
+              </div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-label">Total Carbohydrate</span>
+              <div class="nutrition-amount">
+                <span id="nutrition-carbs" class="nutrition-amount-value">-</span>
+                <span class="nutrition-amount-unit">g</span>
+              </div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-label">Protein</span>
+              <div class="nutrition-amount">
+                <span id="nutrition-protein" class="nutrition-amount-value">-</span>
+                <span class="nutrition-amount-unit">g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="bottom-section">
+      <div class="cta-container">
+        <a href="https://links.alma.food/alma-sharing" class="app-store-button">
+          <svg class="app-icon" viewBox="0 0 24 24">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          Download Alma to track or save
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // Ensure fonts are loaded
+      document.fonts.ready.then(() => {
+        // Fonts loaded successfully
+      });
+      
+      // Get share token from URL query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const shareToken = urlParams.get('token');
+      
+      // Debug: Show token info immediately
+      try {
+        const debugInfo = document.getElementById('debug-info');
+        if (debugInfo) {
+          debugInfo.innerHTML = `Token: ${shareToken || 'NOT FOUND'}<br>URL: ${window.location.search}<br>Hostname: ${window.location.hostname}`;
+        }
+      } catch (e) {
+        console.error('Debug error:', e);
+      }
+      
+      // API configuration - determine environment from hostname
+      const isStaging = window.location.hostname.includes('staging');
+      const API_BASE_URL = isStaging ? 'https://staging.alma.food' : 'https://api.alma.food';
+      
+      // Image URL configuration - matching iOS app pattern
+      const IMAGE_CONFIG = {
+        staging: {
+          imgix: 'https://alma-staging.imgix.net/food-images',
+          legacy: 'https://iphjknahaxgsfaobhpyp.supabase.co/storage/v1/object/public/food-images'
+        },
+        production: {
+          imgix: 'https://alma-prod.imgix.net/food-images', 
+          legacy: 'https://waljgagcqpkxhixjrvwp.supabase.co/storage/v1/object/public/food-images'
+        }
+      };
+      
+      // Helper function to construct image URL like iOS app
+      function constructImageURL(foodId, dimension = null, useImgix = true) {
+        if (!foodId) return null;
+        
+        const env = isStaging ? 'staging' : 'production';
+        const baseURL = useImgix ? IMAGE_CONFIG[env].imgix : IMAGE_CONFIG[env].legacy;
+        const imageURL = `${baseURL}/${foodId.toLowerCase()}.jpg`;
+        
+        // Add imgix parameters if using imgix
+        if (useImgix && dimension) {
+          const params = new URLSearchParams();
+          if (dimension.height) {
+            params.append('h', dimension.height.toString());
+          }
+          if (dimension.width) {
+            params.append('w', dimension.width.toString());
+          }
+          // Add device pixel ratio (assume 2x for web)
+          params.append('dpr', '2');
+          
+          return `${imageURL}?${params.toString()}`;
+        }
+        
+        return imageURL;
+      }
+      
+      // Environment and configuration ready
+      
+      async function loadFood() {
+        if (!shareToken || shareToken === 'index.html') {
+          showError();
+          return;
+        }
+
+        try {
+          const apiUrl = `${API_BASE_URL}/food_item/shared/${shareToken}`;
+          const response = await fetch(apiUrl);
+          
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          
+          const food = await response.json();
+          displayFood(food);
+        } catch (error) {
+          showError();
+        }
+      }
+
+      function displayFood(food) {
+        // Hide loading and error, show content
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('error').classList.add('hidden');
+        document.getElementById('recipe-content').classList.remove('hidden');
+
+        // Extract food_item data from the response
+        const foodItem = food.food_item;
+
+        // Set title
+        const foodName = foodItem.food_name || foodItem.name || 'Food';
+        document.getElementById('recipe-title').textContent = foodName;
+
+        // Set creator info if available
+        if (food.creator) {
+          document.getElementById('recipe-creator').classList.remove('hidden');
+          document.getElementById('creator-name').textContent = food.creator.name || 'Alma User';
+          
+          const creatorAvatar = document.getElementById('creator-avatar');
+          if (food.creator.profile_image_url) {
+            // Use actual profile image and clear any text content
+            creatorAvatar.textContent = '';
+            creatorAvatar.innerHTML = `<img src="${food.creator.profile_image_url}" alt="${food.creator.name}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1;">`;
+          } else if (food.creator.name) {
+            creatorAvatar.textContent = food.creator.name.charAt(0).toUpperCase();
+          }
+        }
+
+        // Set hero image - simple approach like recipe
+        const heroImg = document.getElementById('recipe-hero-image');
+        const foodId = foodItem.food_id;
+        
+        if (foodId) {
+          const imageURL = constructImageURL(foodId, { height: 480 }, true);
+          heroImg.src = imageURL;
+          heroImg.onerror = () => {
+            // Try legacy URL on imgix failure
+            const legacyURL = constructImageURL(foodId, null, false);
+            heroImg.src = legacyURL;
+            heroImg.onerror = () => {
+              // Use placeholder image if all fails
+              heroImg.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDQwMCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjQwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xODAgMTEwSDIyMFYxMzBIMTgwVjExMFoiIGZpbGw9IiM5Q0EzQUYiLz4KPC9zdmc+';
+              heroImg.alt = 'Food image not available';
+            };
+          };
+        } else {
+          // No food_id available, use placeholder
+          heroImg.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDQwMCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjQwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xODAgMTEwSDIyMFYxMzBIMTgwVjExMFoiIGZpbGw9IiM5Q0EzQUYiLz4KPC9zdmc+';
+          heroImg.alt = 'Food image not available';
+        }
+
+        // Set nutrition values
+        if (foodItem) {
+          const calories = Math.round(foodItem.calories || 0);
+          const protein = Math.round(foodItem.protein || 0);
+          const carbs = Math.round(foodItem.carbs || 0);
+          const fat = Math.round(foodItem.fat || 0);
+          
+          // Update macro card values
+          document.getElementById('macro-calories').textContent = calories;
+          document.getElementById('macro-protein').textContent = protein + 'g';
+          document.getElementById('macro-carbs').textContent = carbs + 'g';
+          document.getElementById('macro-fat').textContent = fat + 'g';
+          
+          // Nutrition facts
+          document.getElementById('nutrition-calories').textContent = calories;
+          document.getElementById('nutrition-protein').textContent = (foodItem.protein || 0).toFixed(1);
+          document.getElementById('nutrition-carbs').textContent = (foodItem.carbs || 0).toFixed(1);
+          document.getElementById('nutrition-fat').textContent = (foodItem.fat || 0).toFixed(1);
+        }
+
+        // Set ingredients
+        if (foodItem?.ingredients && foodItem.ingredients.length > 0) {
+          const ingredientsHeaderContainer = document.getElementById('ingredients-header-container');
+          const ingredientsSection = document.getElementById('ingredients-section');
+          const ingredientsList = document.getElementById('ingredients-list');
+          const ingredientsCount = document.getElementById('ingredients-count');
+          
+          ingredientsHeaderContainer.classList.remove('hidden');
+          ingredientsSection.classList.remove('hidden');
+          ingredientsCount.textContent = foodItem.ingredients.length;
+          ingredientsList.innerHTML = '';
+          
+          foodItem.ingredients.forEach((ingredient, index) => {
+            const item = document.createElement('div');
+            item.className = 'ingredient-item';
+            
+            const portion = ingredient.quantity && ingredient.unit 
+              ? `${ingredient.quantity} ${ingredient.unit}`
+              : ingredient.portion || '';
+            
+            // Calculate ingredient macros
+            const calories = Math.round(ingredient.macros?.calories || 0);
+            const protein = Math.round(ingredient.macros?.protein || 0);
+            const carbs = Math.round(ingredient.macros?.carbs || 0);
+            const fat = Math.round(ingredient.macros?.fat || 0);
+            
+            // Direct ingredient image URL - environment aware
+            const env = isStaging ? 'staging' : 'production';
+            const imgixBase = env === 'staging' ? 'https://alma-staging.imgix.net' : 'https://alma-prod.imgix.net';
+            const ingredientImageURL = ingredient.food_id ? 
+              `${imgixBase}/food-images/${ingredient.food_id.toLowerCase()}.jpg?w=48&dpr=2` : null;
+            
+
+            
+            item.innerHTML = `
+              <div class="ingredient-left">
+                <div class="ingredient-image-container">
+                  ${ingredientImageURL ? 
+                    `<img class="ingredient-image" src="${ingredientImageURL}" alt="${ingredient.name}" onload="this.classList.add('loaded');">` :
+                    `<svg width="24" height="24" viewBox="0 0 24 24" fill="#A1A1A1">
+                      <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                    </svg>`
+                  }
+                </div>
+                <div class="ingredient-info">
+                  <div class="ingredient-name">${ingredient.name}</div>
+                  ${portion ? `<div class="ingredient-portion">${portion}</div>` : ''}
+                </div>
+              </div>
+              <div class="ingredient-macros">
+                ${calories} cal <span style="color: #FF9500;">🟠</span> ${protein} <span style="color: #34C759;">🟢</span> ${carbs} <span style="color: #FFCC00;">🟡</span> ${fat}
+              </div>
+            `;
+            ingredientsList.appendChild(item);
+          });
+        }
+
+        // Set serves/portion label
+        const servesText = document.querySelector('.serves-text');
+        let portionLabel = '';
+        if (foodItem.portion) {
+          portionLabel = foodItem.portion;
+        } else if (foodItem.quantity && foodItem.unit) {
+          // Use pluralization if quantity > 1 and unit_info is available
+          const isPlural = foodItem.quantity > 1 && foodItem.unit_info && foodItem.unit_info.plural;
+          const unitLabel = isPlural ? foodItem.unit_info.plural : (foodItem.unit_info ? foodItem.unit_info.singular : foodItem.unit);
+          portionLabel = `${foodItem.quantity} ${unitLabel}`;
+        }
+        servesText.textContent = portionLabel;
+      }
+
+      function showError() {
+        const loadingEl = document.getElementById('loading');
+        const errorEl = document.getElementById('error');
+        const heroSection = document.querySelector('.hero-section');
+        
+        // Hide loading and hero section, show error
+        loadingEl.classList.add('hidden');
+        if (heroSection) heroSection.classList.add('hidden');
+        errorEl.classList.remove('hidden');
+      }
+
+      // Load food when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadFood);
+      } else {
+        loadFood();
+      }
+    </script>
+  </body>
+</html> 

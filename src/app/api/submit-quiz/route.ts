@@ -19,6 +19,8 @@ export async function POST(request: NextRequest) {
 
     // Loops API integration
     const loopsApiKey = process.env.LOOPS_API_KEY;
+    const loopsTransactionalId = process.env.LOOPS_TRANSACTIONAL_ID;
+
     if (!loopsApiKey) {
       console.error('LOOPS_API_KEY environment variable is not set');
       return NextResponse.json(
@@ -27,22 +29,35 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Add contact to Loops
-    const loopsResponse = await fetch('https://app.loops.so/api/v1/contacts/create', {
+    if (!loopsTransactionalId) {
+      console.error('LOOPS_TRANSACTIONAL_ID environment variable is not set');
+      return NextResponse.json(
+        { error: 'Email template not configured' },
+        { status: 500 }
+      );
+    }
+
+    // Send transactional email via Loops
+    const loopsResponse = await fetch('https://app.loops.so/api/v1/transactional', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${loopsApiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email,
-        personalityType: personalityType.id,
-        personalityName: personalityType.name,
-        personalityDescription: personalityType.description,
-        macroProtein: personalityType.macroSplit.protein,
-        macroCarbs: personalityType.macroSplit.carbs,
-        macroFat: personalityType.macroSplit.fat,
-        personalityMessage: personalityType.message,
+        transactionalId: loopsTransactionalId,
+        email: email,
+        addToAudience: true, // Add contact to your Loops audience
+        dataVariables: {
+          personalityType: personalityType.id,
+          personalityName: personalityType.name,
+          personalityTitle: personalityType.title,
+          personalityDescription: personalityType.description,
+          macroProtein: personalityType.macroSplit.protein,
+          macroCarbs: personalityType.macroSplit.carbs,
+          macroFat: personalityType.macroSplit.fat,
+          personalityMessage: personalityType.message,
+        },
       }),
     });
 

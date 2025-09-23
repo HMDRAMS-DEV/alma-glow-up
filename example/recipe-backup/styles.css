@@ -1,0 +1,925 @@
+/* Font Declarations - matching iOS Grotesk.swift */
+/* Grotesk Fonts */
+@font-face {
+  font-family: 'HALFourGrotesk';
+  src: url('../fonts/HALFourGrotesk-Regular.woff2') format('woff2'),
+       url('../fonts/HALFourGrotesk-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HALFourGrotesk';
+  src: url('../fonts/HALFourGrotesk-Medium.woff2') format('woff2'),
+       url('../fonts/HALFourGrotesk-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HALFourGrotesk';
+  src: url('../fonts/HALFourGrotesk-Bold.woff2') format('woff2'),
+       url('../fonts/HALFourGrotesk-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HALFourGrotesk';
+  src: url('../fonts/HALFourGrotesk-Italic.woff2') format('woff2'),
+       url('../fonts/HALFourGrotesk-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Alpina Font */
+@font-face {
+  font-family: 'GTAlpina';
+  src: url('../fonts/GT%20Alpina%20Standard%20Bold.woff2') format('woff2'),
+       url('../fonts/GT-Alpina-Standard-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Alma Colors - matching UX+AlmaColor.swift */
+  --alma-primary: #33140C;
+  --alma-primary-inverted: #FFFFFF;
+  --alma-secondary-text: #A1A1A1;
+  --alma-background: #FFFEFC;
+  --alma-secondary-background: #F2F2F2;
+  --alma-teriyaki-cream: #F7F5ED;
+  --alma-nearly-white: #F9F9F9;
+  --alma-ui-border: #E8E8E8;
+  --alma-card-background: #FFFFFF;
+  --alma-shadow-light: rgba(0, 0, 0, 0.08);
+  --alma-shadow-dark: rgba(0, 0, 0, 0.15);
+  
+  /* Macros Colors */
+  --alma-macros-yellow: #FFBA0A;
+  --alma-macros-green: #B2C200;
+  --alma-macros-orange: #F66A38;
+  --alma-macros-purple: #7B4AAF;
+  
+  /* Spacing - matching UX.Spacing */
+  --spacing-unit: 4px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-20: 80px;
+  
+  /* Corner Radius - matching UX.CornerRadius */
+  --radius-card: 30px;
+  --radius-unit-6: 24px;
+  --radius-unit-4: 16px;
+  --radius-unit-3: 12px;
+  --radius-unit-2: 8px;
+  --radius-unit-1: 4px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'HALFourGrotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  background-color: var(--alma-teriyaki-cream);
+  color: var(--alma-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Page-level fade-in animation */
+body {
+  opacity: 0;
+  animation: pageLoad 0.5s ease-out forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes pageLoad {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Loading state improvements */
+.loading-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f7f5ed 0%, #f0ede5 100%);
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+}
+
+.loading-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+}
+
+.loading-content {
+  text-align: center;
+  color: #6b7280;
+}
+
+.loading-content p {
+  margin: 16px 0 0 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Loading State */
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: showLoading 0s ease-in-out 350ms forwards;
+}
+
+@keyframes showLoading {
+  to {
+    opacity: 1;
+  }
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e9ecef;
+  border-top: 3px solid #28a745;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Recipe content improvements */
+.recipe-container {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease-out;
+}
+
+.recipe-container:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ensure hidden elements are truly hidden */
+.hidden {
+  display: none !important;
+}
+
+/* Smooth image loading */
+.ingredient-image {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.ingredient-image.loaded {
+  opacity: 1;
+}
+
+.hero-image {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+/* Staggered animation for ingredient items */
+.ingredient-item {
+  opacity: 0;
+  transform: translateY(5px);
+  animation: fadeInUp 0.2s ease forwards;
+}
+
+.ingredient-item:nth-child(1) { animation-delay: 0.05s; }
+.ingredient-item:nth-child(2) { animation-delay: 0.1s; }
+.ingredient-item:nth-child(3) { animation-delay: 0.15s; }
+.ingredient-item:nth-child(4) { animation-delay: 0.2s; }
+.ingredient-item:nth-child(5) { animation-delay: 0.25s; }
+.ingredient-item:nth-child(n+6) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-5);
+}
+
+
+
+/* Full bleed recipe image */
+.recipe-image-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.recipe-image-full {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-gradient-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  pointer-events: none;
+  /* Default gradient - will be overridden by JavaScript */
+  background: linear-gradient(to bottom, 
+    rgba(247, 245, 237, 0) 0%, 
+    rgba(247, 245, 237, 0.02) 15%, 
+    rgba(247, 245, 237, 0.05) 25%, 
+    rgba(247, 245, 237, 0.1) 35%, 
+    rgba(247, 245, 237, 0.18) 45%, 
+    rgba(247, 245, 237, 0.28) 55%, 
+    rgba(247, 245, 237, 0.4) 65%, 
+    rgba(247, 245, 237, 0.55) 75%, 
+    rgba(247, 245, 237, 0.72) 85%, 
+    rgba(247, 245, 237, 0.9) 95%, 
+    var(--alma-teriyaki-cream) 100%
+  );
+}
+
+/* Main content area */
+.main-content {
+  margin-bottom: 180px;
+  position: relative;
+  background: var(--alma-teriyaki-cream);
+}
+
+/* Recipe header section */
+.recipe-header {
+  text-align: center;
+  margin: var(--spacing-8) 0 var(--spacing-8);
+}
+
+.recipe-title {
+  font-family: 'GTAlpina', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--alma-primary);
+  text-align: center;
+  margin: 0 0 var(--spacing-2);
+  line-height: 1.1;
+}
+
+.recipe-brand {
+  font-size: 14px;
+  color: var(--alma-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1);
+  
+}
+
+/* Improve brand avatar styling for both images and text */
+.brand-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  margin-right: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.brand-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.brand-avatar::before {
+  content: "CM";
+}
+
+.recipe-brand-name {
+  font-weight: 500;
+  color: var(--alma-primary);
+}
+
+/* Macros card */
+.macros-card {
+  background: var(--alma-card-background);
+  border-radius: var(--radius-card);
+  box-shadow: 0 2px 20px var(--alma-shadow-light);
+  border: 0.5px solid var(--alma-ui-border);
+  margin-bottom: var(--spacing-6);
+}
+
+/* Macros section */
+.macros-section {
+  padding: var(--spacing-6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.macro-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.macro-item:not(:last-child) {
+  border-right: 0.5px solid var(--alma-ui-border);
+  margin-right: var(--spacing-3);
+  padding-right: var(--spacing-3);
+}
+
+.macro-label {
+  font-size: 14px;
+  color: var(--alma-secondary-text);
+  font-weight: 400;
+  text-align: center;
+  line-height: 1;
+}
+
+.macro-value {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--alma-primary);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.macro-value-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1);
+}
+
+.macro-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+}
+
+.protein-icon {
+  background-color: var(--alma-macros-orange);
+}
+
+.carbs-icon {
+  background-color: var(--alma-macros-green);
+}
+
+.fat-icon {
+  background-color: var(--alma-macros-yellow);
+}
+
+/* Creator section */
+.creator-card {
+  background: var(--alma-card-background);
+  border-radius: var(--radius-card);
+  box-shadow: 0 2px 20px var(--alma-shadow-light);
+  padding: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.creator-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+.creator-info {
+  flex: 1;
+}
+
+.creator-label {
+  font-size: 13px;
+  color: var(--alma-secondary-text);
+  margin-bottom: var(--spacing-unit);
+}
+
+.creator-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--alma-primary);
+}
+
+/* Section card */
+.section-card {
+  background: var(--alma-card-background);
+  border-radius: var(--radius-card);
+  box-shadow: 0 4px 20px var(--alma-shadow-light);
+  padding: 24px;
+  margin-bottom: var(--spacing-6);
+  border: 0.5px solid var(--alma-ui-border);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: var(--spacing-1);
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--alma-primary);
+}
+
+.section-count {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--alma-primary-inverted);
+  display: flex;
+    width: 22px;
+    height: 22px;
+    padding: 2.5px 6.5px;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    border-radius: 33px;
+    border: 0.5px solid rgba(0, 0, 0, 0.20);
+    background: linear-gradient(180deg, #592315 0%, #33140C 100%);
+}
+
+/* Instructions */
+.instructions-text {
+  font-size: 16px;
+  color: var(--alma-primary);
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+/* Ingredients */
+.section-card-ingredients {
+  padding: 0 24px;
+}
+
+/* Nutrition Facts */
+.section-card-nutrition {
+  padding: 0 24px;
+}
+
+/* Ingredient item styling */
+.ingredient-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ingredient-item:last-child {
+  border-bottom: none;
+}
+
+.ingredient-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0; /* Allow text to truncate */
+}
+
+.ingredient-image-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.ingredient-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ingredient-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ingredient-name {
+  font-weight: 500;
+  font-size: 16px;
+  color: #1f2937;
+  margin-bottom: 2px;
+}
+
+.ingredient-portion {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.ingredient-macros {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+
+/* Nutrition facts */
+.nutrition-facts {
+  background: white;
+}
+
+.nutrition-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+
+}
+
+.nutrition-row:not(:last-child) {
+  border-bottom: 0.5px solid var(--alma-ui-border);
+}
+
+.nutrition-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--alma-primary);
+}
+
+.nutrition-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.nutrition-amount-value {
+  font-size: 16px;
+  
+  color: var(--alma-primary);
+}
+
+.nutrition-amount-unit {
+  font-size: 16px;
+  color: var(--alma-primary);
+}
+
+.section-subtitle {
+  font-size: 13px;
+  color: var(--alma-secondary-text);
+  margin-top: 4px;
+}
+
+/* Ingredients Header Container */
+.ingredients-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-1);
+}
+
+.ingredients-header-container .section-title,
+.ingredients-header-container .section-count {
+  margin-top: var(--spacing-1);
+}
+
+/* Serves Card */
+.serves-card {
+  background: var(--alma-card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--alma-shadow-light);
+  border: 0.5px solid var(--alma-ui-border);
+  padding: 0 var(--spacing-3) 0 var(--spacing-2);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  height: 32px;
+}
+
+.serves-icon {
+  fill: var(--alma-primary);
+  width: 16px;
+  height: 16px;
+}
+
+.serves-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--alma-primary);
+}
+
+/* Bottom CTA section */
+.bottom-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--spacing-4) var(--spacing-5) 40px;
+  background: linear-gradient(to top, var(--alma-teriyaki-cream) 0%, var(--alma-teriyaki-cream) 70%, rgba(247, 245, 237, 0) 100%);
+  z-index: 100;
+}
+
+.cta-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.app-store-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1);
+  width: 100%;
+  border-radius: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background: linear-gradient(180deg, #47662E 0%, #2B3D1C 100%);
+  box-shadow: 0px 9px 15px -4px rgba(0, 0, 0, 0.26);
+  color: var(--alma-primary-inverted);
+  padding: 16px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.app-store-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.app-store-button:active {
+  opacity: 0.7;
+  transform: translateY(0);
+}
+
+.app-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Ensure hidden class actually hides elements */
+.hidden {
+  display: none !important;
+}
+
+/* Media query for larger devices */
+@media (min-width: 481px) {
+  .macro-item:not(:last-child) {
+    margin-right: calc(var(--spacing-3) * 3);
+    padding-right: calc(var(--spacing-3) * 3);
+  }
+}
+
+/* Hero section styling */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.hero-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+}
+
+/* Smooth loading transitions */
+.ingredient-image {
+  transition: opacity 0.2s ease;
+}
+
+.ingredient-image[src=""] {
+  opacity: 0;
+}
+
+/* Loading skeleton for images */
+.ingredient-image-container {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+.ingredient-image-container img {
+  background: white;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Error state styling */
+.error-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--alma-teriyaki-cream);
+}
+
+.error-content {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  background: white;
+  border-radius: 16px;
+  padding: 40px 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.error-hero {
+  margin-bottom: 32px;
+}
+
+.error-emoji {
+  font-size: 64px;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.error-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+  line-height: 1.1;
+}
+
+.error-description {
+  font-size: 16pt;
+  color: var(--alma-secondary-text);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.error-cta {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 32px;
+}
+
+.error-features {
+  margin-bottom: 24px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 15px;
+  color: #374151;
+  text-align: left;
+}
+
+.feature-emoji {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.error-download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #4ade80;
+  color: white;
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(74, 222, 128, 0.2);
+}
+
+.error-download-button:hover {
+  background: #22c55e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+}
+
+.error-download-button .app-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.error-subtitle {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .error-content {
+    padding: 32px 24px;
+    margin: 0 16px;
+  }
+  
+  .error-emoji {
+    font-size: 56px;
+  }
+  
+  .error-title {
+    font-size: 24px;
+  }
+  
+  .feature-item {
+    font-size: 14px;
+  }
+}

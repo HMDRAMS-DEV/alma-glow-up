@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alma Recipe</title>
+    
+    <!-- Alma Rich Sharing Meta Tags -->
+    <meta property="og:title" content="Check out this recipe in Alma" />
+    <meta property="og:description" content="Discover healthy recipes, nutrition info, and cook amazing meals with friends." />
+    <meta property="og:image" content="https://deeplink.alma.food/img/alma-sharing-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://deeplink.alma.food/recipe/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Alma" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Check out this recipe in Alma" />
+    <meta name="twitter:description" content="Discover healthy recipes, nutrition info, and cook amazing meals with friends." />
+    <meta name="twitter:image" content="https://deeplink.alma.food/img/alma-sharing-card.png" />
+    <meta name="twitter:site" content="@almafoodapp" />
+    <meta name="description" content="Discover healthy recipes, nutrition info, and cook amazing meals with friends." />
+    
+    <!-- App Clip Meta Tags -->
+    <meta name="apple-itunes-app" content="app-id=6736377919, app-clip-bundle-id=com.alma.alma-app-debug.AlmaAppClip">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Alma Recipe">
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="../fonts/HALFourGrotesk-Regular.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="../fonts/HALFourGrotesk-Medium.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="../fonts/HALFourGrotesk-Bold.otf" as="font" type="font/otf" crossorigin>
+    
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+    <!-- Full bleed recipe image -->
+    <div class="hero-section">
+      <img 
+        id="recipe-hero-image" 
+        class="hero-image" 
+        alt="Recipe image"
+        fetchpriority="high"
+        width="800"
+        height="480"
+        style="object-fit: cover; width: 100%; height: 240px; background-color: #f3f4f6;"
+      />
+      <div class="hero-gradient"></div>
+    </div>
+
+    <!-- Main content -->
+    <div class="container">
+      <div class="main-content">
+      <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+      </div>
+
+      <!-- Error State -->
+      <div id="error" class="error-container hidden">
+        <div class="error-content">
+          <div class="error-hero">
+            <div class="error-emoji">🍽️</div>
+            <h2 class="error-title">Recipe not found.</h2>
+            <p class="error-description">This recipe has been removed or the link is invalid.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="recipe-content" class="hidden">
+        
+        <!-- Recipe Title Section -->
+        <div class="recipe-header">
+          <h1 id="recipe-title" class="recipe-title"></h1>
+          <div id="recipe-creator" class="recipe-brand hidden">
+            <div id="creator-avatar" class="brand-avatar"></div>
+            by <span id="creator-name" class="recipe-brand-name"></span>
+          </div>
+        </div>
+
+        <!-- Macros Card -->
+        <div class="macros-card">
+          <div class="macros-section">
+            <div class="macro-item">
+              <div class="macro-label">Cals</div>
+              <div id="macro-calories" class="macro-value">-</div>
+            </div>
+            <div class="macro-item">
+              <div class="macro-label">Protein</div>
+              <div class="macro-value-with-icon">
+                <span class="macro-icon protein-icon">P</span>
+                <span id="macro-protein" class="macro-value">-</span>
+              </div>
+            </div>
+            <div class="macro-item">
+              <div class="macro-label">Carbs</div>
+              <div class="macro-value-with-icon">
+                <span class="macro-icon carbs-icon">C</span>
+                <span id="macro-carbs" class="macro-value">-</span>
+              </div>
+            </div>
+            <div class="macro-item">
+              <div class="macro-label">Fat</div>
+              <div class="macro-value-with-icon">
+                <span class="macro-icon fat-icon">F</span>
+                <span id="macro-fat" class="macro-value">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Instructions Section -->
+        <div class="section-header">
+            <h2 class="section-title">Instructions</h2>    
+        </div>
+        <div id="instructions-section" class="section-card hidden">
+          <div id="instructions-content" class="instructions-text"></div>
+        </div>
+
+        <!-- Ingredients Section -->
+        <div class="ingredients-header-container">
+          <div class="section-header">
+              <h2 class="section-title">Ingredients</h2>
+              <span id="ingredients-count" class="section-count"></span>
+            </div>
+          <div class="serves-card">
+            <img src="../img/person.svg" alt="Person" class="serves-icon" width="19" height="19">
+            <span id="serves-text" class="serves-text">Serves 1</span>
+          </div>
+        </div>
+        <div id="ingredients-section" class="section-card section-card-ingredients hidden">
+          <div id="ingredients-list"></div>
+        </div>
+
+        <!-- Nutrition Facts Section -->
+        <div class="section-header">
+            <h2 class="section-title">Nutrition Facts</h2>
+          </div>
+        <div id="nutrition-section" class="section-card section-card-nutrition">   
+          <div class="nutrition-facts">
+            <div class="nutrition-row">
+              <span class="nutrition-label">Calories</span>
+              <div class="nutrition-amount">
+                <span id="nutrition-calories" class="nutrition-amount-value">-</span>
+              </div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-label">Total Fat</span>
+              <div class="nutrition-amount">
+                <span id="nutrition-fat" class="nutrition-amount-value">-</span>
+                <span class="nutrition-amount-unit">g</span>
+              </div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-label">Total Carbohydrate</span>
+              <div class="nutrition-amount">
+                <span id="nutrition-carbs" class="nutrition-amount-value">-</span>
+                <span class="nutrition-amount-unit">g</span>
+              </div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-label">Protein</span>
+              <div class="nutrition-amount">
+                <span id="nutrition-protein" class="nutrition-amount-value">-</span>
+                <span class="nutrition-amount-unit">g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- Download App Section -->
+    <div class="bottom-section">
+      <div class="cta-container">
+        <a href="#" onclick="openAlma()" class="app-store-button">
+          <svg class="app-icon" viewBox="0 0 24 24">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          Download Alma to track or save
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // Ensure fonts are loaded
+      document.fonts.ready.then(() => {
+        // Fonts loaded successfully
+      });
+      
+      // Get share token from URL query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const shareToken = urlParams.get('token');
+      
+      // API configuration - determine environment from hostname
+      const isStaging = window.location.hostname.includes('staging');
+      const API_BASE_URL = isStaging ? 'https://staging.alma.food' : 'https://api.alma.food';
+      
+      // Image URL configuration - matching iOS app pattern
+      const IMAGE_CONFIG = {
+        staging: {
+          imgix: 'https://alma-staging.imgix.net/food-images',
+          legacy: 'https://iphjknahaxgsfaobhpyp.supabase.co/storage/v1/object/public/food-images'
+        },
+        production: {
+          imgix: 'https://alma-prod.imgix.net/food-images', 
+          legacy: 'https://waljgagcqpkxhixjrvwp.supabase.co/storage/v1/object/public/food-images'
+        }
+      };
+      
+      // Helper function to construct image URL like iOS app
+      function constructImageURL(foodId, dimension = null, useImgix = true) {
+        if (!foodId) return null;
+        
+        const env = isStaging ? 'staging' : 'production';
+        const baseURL = useImgix ? IMAGE_CONFIG[env].imgix : IMAGE_CONFIG[env].legacy;
+        const imageURL = `${baseURL}/${foodId.toLowerCase()}.jpg`;
+        
+        // Add imgix parameters if using imgix
+        if (useImgix && dimension) {
+          const params = new URLSearchParams();
+          if (dimension.height) {
+            params.append('h', dimension.height.toString());
+          }
+          if (dimension.width) {
+            params.append('w', dimension.width.toString());
+          }
+          // Add device pixel ratio (assume 2x for web)
+          params.append('dpr', '2');
+          
+          return `${imageURL}?${params.toString()}`;
+        }
+        
+        return imageURL;
+      }
+      
+      // Environment and configuration ready
+      
+      async function loadRecipe() {
+        if (!shareToken || shareToken === 'index.html') {
+          showError();
+          return;
+        }
+
+        try {
+          const apiUrl = `${API_BASE_URL}/recipe/shared/${shareToken}`;
+          const response = await fetch(apiUrl);
+          
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          
+          const recipe = await response.json();
+          displayRecipe(recipe);
+        } catch (error) {
+          showError();
+        }
+      }
+
+      function displayRecipe(recipe) {
+        // Immediately hide loading state to prevent flash
+        const loadingEl = document.getElementById('loading');
+        const errorEl = document.getElementById('error');
+        const contentEl = document.getElementById('recipe-content');
+        
+        // Cancel any loading animation and hide immediately
+        loadingEl.style.animation = 'none';
+        loadingEl.style.opacity = '0';
+        loadingEl.classList.add('hidden');
+        errorEl.classList.add('hidden');
+        
+        // Show content immediately
+        contentEl.classList.remove('hidden');
+
+        // Set title - use recipe.name directly
+        const foodName = recipe.name || 'Recipe';
+        document.getElementById('recipe-title').textContent = foodName;
+        
+        // Update page title and meta tags for better sharing
+        updateMetaTags(recipe, foodName);
+
+        // Set creator info if available
+        if (recipe.creator) {
+          document.getElementById('recipe-creator').classList.remove('hidden');
+          document.getElementById('creator-name').textContent = recipe.creator.name || 'Alma User';
+          
+          const creatorAvatar = document.getElementById('creator-avatar');
+          if (recipe.creator.profile_image_url) {
+            // Use actual profile image and clear any text content
+            creatorAvatar.textContent = ''; // Clear any existing text
+            creatorAvatar.innerHTML = `<img src="${recipe.creator.profile_image_url}" alt="${recipe.creator.name}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1;">`;
+          } else if (recipe.creator.name) {
+            // Fallback to initials
+            creatorAvatar.textContent = recipe.creator.name.charAt(0).toUpperCase();
+          }
+        }
+
+        // Set hero image - try image_url first, then construct from food_id
+        const heroImg = document.getElementById('recipe-hero-image');
+        
+        if (recipe.image_url) {
+          // Use direct image URL if available
+          const optimizedUrl = recipe.image_url.includes('imgix') 
+            ? `${recipe.image_url}?w=800&h=480&fit=crop&auto=format,compress&q=80`
+            : recipe.image_url;
+          heroImg.src = optimizedUrl;
+        } else {
+          // Try to construct from food_id (from recipe or first ingredient)
+          let foodId = recipe.food_id;
+          if (!foodId && recipe.ingredients && recipe.ingredients.length > 0) {
+            foodId = recipe.ingredients[0].food_id;
+          }
+          
+          if (foodId) {
+            const imageURL = constructImageURL(foodId, { height: 480 }, true);
+            heroImg.src = imageURL;
+            heroImg.onerror = () => {
+              // Try legacy URL on imgix failure
+              const legacyURL = constructImageURL(foodId, null, false);
+              heroImg.src = legacyURL;
+              heroImg.onerror = () => {
+                // Use placeholder image if all fails
+                heroImg.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDQwMCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjQwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xODAgMTEwSDIyMFYxMzBIMTgwVjExMFoiIGZpbGw9IiM5Q0EzQUYiLz4KPC9zdmc+';
+                heroImg.alt = 'Recipe image not available';
+              };
+            };
+          } else {
+            // No food_id available, use placeholder
+            heroImg.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDQwMCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjQwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xODAgMTEwSDIyMFYxMzBIMTgwVjExMFoiIGZpbGw9IiM5Q0EzQUYiLz4KPC9zdmc+';
+            heroImg.alt = 'Recipe image not available';
+          }
+        }
+
+        // Set nutrition values - use recipe data directly
+        const calories = Math.round(recipe.calories || 0);
+        const protein = Math.round(recipe.protein || 0);
+        const carbs = Math.round(recipe.carbs || 0);
+        const fat = Math.round(recipe.fat || 0);
+        
+        // Update macro card values
+        document.getElementById('macro-calories').textContent = calories;
+        document.getElementById('macro-protein').textContent = protein + 'g';
+        document.getElementById('macro-carbs').textContent = carbs + 'g';
+        document.getElementById('macro-fat').textContent = fat + 'g';
+        
+        // Nutrition facts
+        document.getElementById('nutrition-calories').textContent = calories;
+        document.getElementById('nutrition-protein').textContent = (recipe.protein || 0).toFixed(1);
+        document.getElementById('nutrition-carbs').textContent = (recipe.carbs || 0).toFixed(1);
+        document.getElementById('nutrition-fat').textContent = (recipe.fat || 0).toFixed(1);
+
+        // Set instructions
+        if (recipe.instructions && recipe.instructions.trim()) {
+          document.getElementById('instructions-content').textContent = recipe.instructions;
+          document.getElementById('instructions-section').classList.remove('hidden');
+        }
+
+        // Set ingredients - use recipe.ingredients directly
+        if (recipe.ingredients && recipe.ingredients.length > 0) {
+          const ingredientsSection = document.getElementById('ingredients-section');
+          const ingredientsList = document.getElementById('ingredients-list');
+          const ingredientsCount = document.getElementById('ingredients-count');
+          const servesText = document.getElementById('serves-text');
+          
+          ingredientsSection.classList.remove('hidden');
+          ingredientsCount.textContent = recipe.ingredients.length;
+          
+          // Update serves text with actual recipe portion
+          if (recipe.portion) {
+            servesText.textContent = recipe.portion;
+          } else if (recipe.quantity && recipe.unit) {
+            servesText.textContent = `${recipe.quantity} ${recipe.unit}`;
+          } else {
+            servesText.textContent = 'Serves 1';
+          }
+          
+          ingredientsList.innerHTML = '';
+          
+          recipe.ingredients.forEach((ingredient, index) => {
+            const item = document.createElement('div');
+            item.className = 'ingredient-item';
+            
+            const portion = ingredient.quantity && ingredient.unit 
+              ? `${ingredient.quantity} ${ingredient.unit}`
+              : ingredient.portion || '';
+            
+            // Use ingredient macros directly (they're now at the top level)
+            const calories = Math.round(ingredient.calories || 0);
+            const protein = Math.round(ingredient.protein || 0);
+            const carbs = Math.round(ingredient.carbs || 0);
+            const fat = Math.round(ingredient.fat || 0);
+            
+            // Direct ingredient image URL - environment aware
+            const env = isStaging ? 'staging' : 'production';
+            const imgixBase = env === 'staging' ? 'https://alma-staging.imgix.net' : 'https://alma-prod.imgix.net';
+            const ingredientImageURL = ingredient.food_id ? 
+              `${imgixBase}/food-images/${ingredient.food_id.toLowerCase()}.jpg?w=48&dpr=2` : null;
+            
+
+            
+            item.innerHTML = `
+              <div class="ingredient-left">
+                <div class="ingredient-image-container">
+                  ${ingredientImageURL ? 
+                    `<img class="ingredient-image" src="${ingredientImageURL}" alt="${ingredient.name}" onload="this.classList.add('loaded');">` :
+                    `<svg width="24" height="24" viewBox="0 0 24 24" fill="#A1A1A1">
+                      <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                    </svg>`
+                  }
+                </div>
+                <div class="ingredient-info">
+                  <div class="ingredient-name">${ingredient.name}</div>
+                  ${portion ? `<div class="ingredient-portion">${portion}</div>` : ''}
+                </div>
+              </div>
+              <div class="ingredient-macros">
+                ${calories} cal <span style="color: #FF9500;">🟠</span> ${protein} <span style="color: #34C759;">🟢</span> ${carbs} <span style="color: #FFCC00;">🟡</span> ${fat}
+              </div>
+            `;
+            ingredientsList.appendChild(item);
+          });
+        }
+      }
+      
+      function updateMetaTags(recipe, recipeName) {
+        const calories = Math.round(recipe.calories || 0);
+        const protein = Math.round(recipe.protein || 0);
+        const hasInstructions = recipe.instructions && recipe.instructions.trim();
+        const ingredientCount = recipe.ingredients?.length || 0;
+        
+        // Create compelling title and description based on recipe characteristics
+        let title, description;
+        
+        if (recipeName.toLowerCase().includes('smoothie') || recipeName.toLowerCase().includes('shake')) {
+          title = `🥤 ${recipeName}`;
+          description = hasInstructions ? `My go-to smoothie recipe - ${protein}g protein!` : `Perfect smoothie blend - ${calories} calories!`;
+        } else if (recipeName.toLowerCase().includes('salad')) {
+          title = `🥗 ${recipeName}`;
+          description = hasInstructions ? `Fresh salad recipe with ${ingredientCount} ingredients` : `Healthy ${recipeName} - only ${calories} calories!`;
+        } else if (recipeName.toLowerCase().includes('pasta')) {
+          title = `🍝 ${recipeName}`;
+          description = hasInstructions ? `Homemade pasta recipe you need to try!` : `Amazing pasta dish - ${calories} cal, ${protein}g protein`;
+        } else if (recipeName.toLowerCase().includes('pizza')) {
+          title = `🍕 ${recipeName}`;
+          description = hasInstructions ? `My favorite pizza recipe - step by step!` : `This pizza is worth every calorie (${calories} cal)`;
+        } else if (recipeName.toLowerCase().includes('soup')) {
+          title = `🍲 ${recipeName}`;
+          description = hasInstructions ? `Comforting soup recipe perfect for any day` : `Warming ${recipeName} - ${calories} calories`;
+        } else if (recipeName.toLowerCase().includes('chicken')) {
+          title = `🍗 ${recipeName}`;
+          description = hasInstructions ? `High-protein chicken recipe - ${protein}g protein!` : `Perfect chicken dish - ${protein}g protein in ${calories} cal`;
+        } else if (protein >= 25) {
+          title = `💪 ${recipeName}`;
+          description = hasInstructions ? `High-protein recipe with full instructions!` : `Protein powerhouse: ${protein}g in just ${calories} calories!`;
+        } else if (hasInstructions) {
+          title = `👨‍🍳 ${recipeName}`;
+          description = `Step-by-step recipe I created on Alma - you'll love it!`;
+        } else {
+          // Default compelling copy
+          title = `🍽️ ${recipeName}`;
+          if (recipe.creator) {
+            description = `Found this amazing recipe on Alma - ${calories} cal, ${protein}g protein!`;
+          } else {
+            description = `My custom recipe - ${calories} cal, ${protein}g protein. Try it!`;
+          }
+        }
+        
+        // Update page title
+        document.title = title;
+        
+        // Update or create meta tags
+        updateMetaTag('og:title', title);
+        updateMetaTag('og:description', description);
+        updateMetaTag('description', description);
+        updateMetaTag('twitter:title', title);
+        updateMetaTag('twitter:description', description);
+        
+        // Update image meta tags if we have a food image
+        if (recipe.food_id) {
+          const imageURL = constructImageURL(recipe.food_id, { height: 400 }, true);
+          updateMetaTag('og:image', imageURL);
+          updateMetaTag('twitter:image', imageURL);
+        }
+      }
+      
+      function updateMetaTag(property, content) {
+        // Try to find existing meta tag
+        let metaTag = document.querySelector(`meta[property="${property}"]`) || 
+                      document.querySelector(`meta[name="${property}"]`);
+        
+        if (metaTag) {
+          metaTag.setAttribute('content', content);
+        } else {
+          // Create new meta tag
+          metaTag = document.createElement('meta');
+          if (property.startsWith('og:') || property.startsWith('twitter:')) {
+            metaTag.setAttribute('property', property);
+          } else {
+            metaTag.setAttribute('name', property);
+          }
+          metaTag.setAttribute('content', content);
+          document.head.appendChild(metaTag);
+        }
+      }
+
+      function showError() {
+        const loadingEl = document.getElementById('loading');
+        const errorEl = document.getElementById('error');
+        const heroSection = document.querySelector('.hero-section');
+        
+        // Hide loading and hero section, show error
+        loadingEl.classList.add('hidden');
+        heroSection.classList.add('hidden');
+        errorEl.classList.remove('hidden');
+      }
+
+      function openAlma() {
+        const shareToken = new URLSearchParams(window.location.search).get('token');
+        const appURL = `alma://recipe/${shareToken}`;
+        const storeURL = 'https://links.alma.food/alma-sharing';
+        
+        // Try app first
+        window.location.href = appURL;
+        
+        // Fallback to store after 1 second
+        setTimeout(() => {
+          window.location.href = storeURL;
+        }, 1000);
+      }
+
+      // Load recipe when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadRecipe);
+      } else {
+        loadRecipe();
+      }
+    </script>
+  </body>
+</html>
