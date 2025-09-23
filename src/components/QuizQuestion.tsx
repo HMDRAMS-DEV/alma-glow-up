@@ -44,7 +44,7 @@ export default function QuizQuestion({
         </CardHeader>
 
         <CardContent className="space-y-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center leading-tight">
+          <h2 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 text-center leading-tight">
             {question.question}
           </h2>
 
@@ -71,7 +71,7 @@ export default function QuizQuestion({
                       <div className="w-full h-full rounded-full bg-white scale-50"></div>
                     )}
                   </div>
-                  <span className="text-base md:text-lg font-medium">
+                  <span className="text-base md:text-lg font-body font-medium">
                     {answer.text}
                   </span>
                 </div>
@@ -82,7 +82,7 @@ export default function QuizQuestion({
           <Button
             onClick={handleSubmit}
             disabled={!selectedAnswer}
-            className="w-full text-lg py-6 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl shadow-lg transition-all duration-200"
+            className="w-full text-lg py-6 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-heading font-semibold rounded-xl shadow-lg transition-all duration-200"
           >
             {questionNumber === totalQuestions ? 'Finish Quiz' : 'Next Question'}
           </Button>

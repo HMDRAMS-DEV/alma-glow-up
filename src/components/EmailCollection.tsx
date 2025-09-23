@@ -56,10 +56,10 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
             <div className="w-20 h-20 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
               <span className="text-2xl">🎉</span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-2">
               Quiz Complete!
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 font-body">
               You&apos;re <span className="text-orange-600 font-semibold">{personalityType.name}</span>
             </p>
           </div>
@@ -67,14 +67,14 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
 
         <CardContent className="space-y-6">
           <div className="bg-orange-50 p-4 rounded-xl">
-            <p className="text-gray-700 text-sm md:text-base">
+            <p className="text-gray-700 text-sm md:text-base font-body">
               Get your personalized macro recommendations and discover how Alma can help you achieve your goals.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="text-left">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-body font-medium text-gray-700 mb-2">
                 Enter your email to discover your food personality
               </label>
               <Input
@@ -91,7 +91,7 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
             <Button
               type="submit"
               disabled={!isValidEmail(email) || isSubmitting}
-              className="w-full text-lg py-6 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl shadow-lg transition-all duration-200"
+              className="w-full text-lg py-6 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-heading font-semibold rounded-xl shadow-lg transition-all duration-200"
             >
               {isSubmitting ? 'Sending...' : 'Get My Results'}
             </Button>
