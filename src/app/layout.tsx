@@ -14,9 +14,9 @@ export const metadata: Metadata = {
     siteName: "Alma",
     images: [
       {
-        url: "/images/logo.png",
-        width: 1200,
-        height: 630,
+        url: "/favicon.ico",
+        width: 32,
+        height: 32,
         alt: "Alma Food Personality Quiz",
       },
     ],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Alma Food Personality Quiz",
     description: "Discover your food personality and ideal macro balance with Alma's personalized nutrition quiz.",
-    images: ["/images/logo.png"],
+    images: ["/favicon.ico"],
   },
   icons: {
     icon: "/favicon.ico",
