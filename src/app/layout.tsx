@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { gtAlpina, halFourGrotesk } from "./fonts";
+import FloatingCarousel from "@/components/FloatingCarousel";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body
         className={`${gtAlpina.variable} ${halFourGrotesk.variable} font-body antialiased`}
       >
+        <FloatingCarousel />
         {children}
       </body>
     </html>

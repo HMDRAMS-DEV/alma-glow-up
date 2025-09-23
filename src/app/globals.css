@@ -140,3 +140,93 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Food emoji shower animation */
+.food-emoji-fall {
+  position: fixed;
+  top: -50px;
+  pointer-events: none;
+  z-index: 1000;
+  animation: fallDown linear forwards;
+  opacity: 0.9;
+}
+
+@keyframes fallDown {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Background image carousel */
+.floating-carousel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.carousel-row {
+  position: absolute;
+  display: flex;
+  width: max-content;
+  animation: floatLeft linear infinite;
+}
+
+.carousel-row:nth-child(1) {
+  top: 15%;
+  animation-duration: 40s;
+  animation-delay: 0s;
+}
+
+.carousel-row:nth-child(2) {
+  top: 45%;
+  animation-duration: 35s;
+  animation-delay: -10s;
+}
+
+.carousel-row:nth-child(3) {
+  top: 75%;
+  animation-duration: 45s;
+  animation-delay: -20s;
+}
+
+.carousel-image {
+  margin: 0 2rem;
+  border-radius: 1rem;
+  opacity: 0.15;
+  transition: all 0.3s ease;
+  filter: blur(0.5px);
+}
+
+.carousel-row:nth-child(1) .carousel-image {
+  width: 120px;
+  height: 120px;
+}
+
+.carousel-row:nth-child(2) .carousel-image {
+  width: 100px;
+  height: 100px;
+}
+
+.carousel-row:nth-child(3) .carousel-image {
+  width: 140px;
+  height: 140px;
+}
+
+@keyframes floatLeft {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

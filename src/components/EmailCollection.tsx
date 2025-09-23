@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -12,12 +12,48 @@ interface EmailCollectionProps {
 export default function EmailCollection({ personalityType, onEmailSubmit }: EmailCollectionProps) {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showEmojiShower, setShowEmojiShower] = useState(false);
+
+  const foodEmojis = ['🍎', '🥑', '🥕', '🍌', '🫐', '🍓', '🥒', '🍊', '🥬', '🍇', '🍅', '🥝', '🍑', '🥦', '🌽', '🍒', '🥭', '🍍'];
+
+  const createEmojiShower = () => {
+    setShowEmojiShower(true);
+
+    // Create multiple emoji elements
+    for (let i = 0; i < 20; i++) {
+      const emoji = document.createElement('div');
+      const randomEmoji = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+
+      emoji.textContent = randomEmoji;
+      emoji.className = 'food-emoji-fall';
+      emoji.style.left = Math.random() * 100 + '%';
+      emoji.style.animationDelay = Math.random() * 2 + 's';
+      emoji.style.animationDuration = (3 + Math.random() * 2) + 's';
+      emoji.style.fontSize = (20 + Math.random() * 20) + 'px';
+
+      document.body.appendChild(emoji);
+
+      // Remove emoji after animation completes
+      setTimeout(() => {
+        emoji.remove();
+      }, 5000);
+    }
+
+    // Hide shower after animation
+    setTimeout(() => {
+      setShowEmojiShower(false);
+    }, 5000);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
 
     setIsSubmitting(true);
+
+    // Trigger emoji shower immediately
+    createEmojiShower();
+
     try {
       const response = await fetch('/api/submit-quiz', {
         method: 'POST',
@@ -34,13 +70,20 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
         throw new Error('Failed to submit quiz');
       }
 
-      onEmailSubmit(email);
+      // Wait a bit to show the emoji shower before transitioning
+      setTimeout(() => {
+        onEmailSubmit(email);
+      }, 2000);
     } catch (error) {
       console.error('Error submitting quiz:', error);
       // Still proceed to show results even if email fails
-      onEmailSubmit(email);
+      setTimeout(() => {
+        onEmailSubmit(email);
+      }, 2000);
     } finally {
-      setIsSubmitting(false);
+      setTimeout(() => {
+        setIsSubmitting(false);
+      }, 2000);
     }
   };
 
@@ -48,84 +91,114 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
+  const getPersonalityEmoji = (personalityId: string) => {
+    const emojiMap: Record<string, string> = {
+      'builder': '💪',
+      'lean-seeker': '🎯',
+      'energizer': '⚡',
+      'harmonizer': '⚖️'
+    };
+    return emojiMap[personalityId] || '✨';
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-50 to-amber-50">
       <Card className="w-full max-w-lg mx-auto text-center shadow-xl">
         <CardHeader className="pb-4">
-          <div className="mb-6">
+          <div className="mb-6 text-center">
             <div className="w-20 h-20 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
-              <span className="text-2xl">✨</span>
+              <span className="text-2xl">{getPersonalityEmoji(personalityType.id)}</span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-4">
+            <h1 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-2">
               You&apos;re {personalityType.name}!
             </h1>
+          </div>
+        </CardHeader>
 
-            {/* Preview of their macro split */}
-            <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-4 rounded-xl mb-4">
-              <p className="text-sm font-body text-gray-600 mb-3">Your ideal macro balance:</p>
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div>
-                  <div className="text-xl font-heading font-bold text-orange-600">{personalityType.macroSplit.protein}%</div>
-                  <div className="text-xs font-body text-gray-600">Protein</div>
+        <CardContent className="space-y-8">
+          {/* Personality Description */}
+          <div className="text-center">
+            <p className="text-gray-700 text-lg font-body leading-relaxed mb-4">
+              {personalityType.description}
+            </p>
+          </div>
+
+          {/* Personality Summary */}
+          <div className="bg-orange-50 p-4 rounded-xl">
+            <p className="text-gray-700 text-base font-body leading-relaxed">
+              {personalityType.message}
+            </p>
+          </div>
+
+          {/* Blurred macro balance teaser */}
+          <div className="relative bg-white p-6 rounded-xl border border-gray-200 min-h-[140px] flex flex-col">
+            <h3 className="text-xl font-heading font-bold text-gray-900 mb-4 text-center">
+              Your Ideal Macro Balance
+            </h3>
+            <div className="flex-1 flex flex-col justify-center">
+              <div className="grid grid-cols-3 gap-4 blur-sm">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-orange-600 mb-1">
+                    {personalityType.macroSplit.protein}%
+                  </div>
+                  <div className="text-sm font-body font-medium text-gray-600">Protein</div>
                 </div>
-                <div>
-                  <div className="text-xl font-heading font-bold text-green-600">{personalityType.macroSplit.carbs}%</div>
-                  <div className="text-xs font-body text-gray-600">Carbs</div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-600 mb-1">
+                    {personalityType.macroSplit.carbs}%
+                  </div>
+                  <div className="text-sm font-body font-medium text-gray-600">Carbs</div>
                 </div>
-                <div>
-                  <div className="text-xl font-heading font-bold text-blue-600">{personalityType.macroSplit.fat}%</div>
-                  <div className="text-xs font-body text-gray-600">Fat</div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-600 mb-1">
+                    {personalityType.macroSplit.fat}%
+                  </div>
+                  <div className="text-sm font-body font-medium text-gray-600">Fat</div>
+                </div>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-white px-3 py-1 rounded-full shadow-sm border">
+                  <span className="text-sm font-body font-medium text-gray-600">🔓 Unlock below</span>
                 </div>
               </div>
             </div>
           </div>
-        </CardHeader>
 
-        <CardContent className="space-y-6">
-          <div className="text-center">
-            <p className="text-gray-700 text-sm md:text-base font-body mb-2">
-              <strong>But here&apos;s the real question:</strong>
-            </p>
-            <p className="text-gray-800 text-base md:text-lg font-body leading-relaxed">
-              How do you turn this knowledge into effortless daily habits that actually stick?
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-8 rounded-2xl border border-green-200 text-center">
+            <div className="text-5xl mb-4">🎁</div>
+            <h2 className="text-2xl md:text-3xl font-heading font-bold text-green-800 mb-3">
+              Win $200 in Healthy Treats
+            </h2>
+            <p className="text-green-700 text-lg">
+              Automatic entry when you get your results
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="text-left">
-              <label htmlFor="email" className="block text-sm font-body font-medium text-gray-700 mb-2">
-                Get your complete {personalityType.name} nutrition blueprint
-              </label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your.email@example.com"
-                className="text-base py-3"
-                required
-              />
-            </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="avocado.toast@gmail.com"
+              className="text-center text-xl py-6 border-2 rounded-xl"
+              required
+            />
 
             <Button
               type="submit"
               disabled={!isValidEmail(email) || isSubmitting}
-              className="w-full text-lg py-6 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-heading font-semibold rounded-xl shadow-lg transition-all duration-200"
+              variant="orange"
+              size="lg"
+              className="w-full text-xl font-heading font-semibold disabled:opacity-50 disabled:cursor-not-allowed py-4 rounded-xl"
             >
-              {isSubmitting ? 'Unlocking Your Blueprint...' : 'Unlock My Perfect Macro Split'}
+              {isSubmitting ? 'Unlocking Results...' : 'Get My Results'}
             </Button>
           </form>
 
-          <div className="text-center space-y-2">
-            <p className="text-xs text-gray-600 font-body">
-              ✓ Your personalized meal timing strategy<br/>
-              ✓ Exact protein targets for your goals<br/>
-              ✓ How to track without obsessing
-            </p>
-            <p className="text-xs text-gray-500 font-body">
-              No spam. Just your results, delivered instantly.
-            </p>
-          </div>
+          <p className="text-sm text-gray-400 font-body text-center">
+            No spam. Results delivered instantly.
+          </p>
         </CardContent>
       </Card>
     </div>

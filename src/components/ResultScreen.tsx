@@ -11,73 +11,46 @@ interface ResultScreenProps {
 export default function ResultScreen({ personalityType, onRestart }: ResultScreenProps) {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-50 to-amber-50">
-      <Card className="w-full max-w-2xl mx-auto text-center shadow-xl">
+      <Card className="w-full max-w-lg mx-auto text-center shadow-xl">
         <CardHeader className="pb-4">
           <div className="mb-6">
-            <div className="w-24 h-24 mx-auto mb-6 bg-orange-100 rounded-full flex items-center justify-center">
-              <span className="text-4xl">✨</span>
+            <div className="w-24 h-24 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
+              <span className="text-4xl">✅</span>
             </div>
             <h1 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
-              You&apos;re {personalityType.name}!
+              Great job!
             </h1>
             <p className="text-lg md:text-xl text-gray-600 font-body font-medium">
-              {personalityType.description}
+              Check your email for your complete personalized nutrition blueprint.
             </p>
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-8">
-          <div className="bg-white p-6 rounded-xl border border-orange-100">
-            <h3 className="text-xl font-heading font-bold text-gray-900 mb-4">
-              Your Ideal Macro Balance
-            </h3>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-orange-600 mb-1">
-                  {personalityType.macroSplit.protein}%
-                </div>
-                <div className="text-sm font-body font-medium text-gray-600">Protein</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 mb-1">
-                  {personalityType.macroSplit.carbs}%
-                </div>
-                <div className="text-sm font-body font-medium text-gray-600">Carbs</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-1">
-                  {personalityType.macroSplit.fat}%
-                </div>
-                <div className="text-sm font-body font-medium text-gray-600">Fat</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-orange-50 p-6 rounded-xl">
-            <p className="text-gray-700 text-base md:text-lg leading-relaxed font-body">
-              {personalityType.message}
+        <CardContent className="space-y-6">
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200">
+            <p className="text-green-800 font-semibold text-lg mb-2">🎁 BONUS: Win $200 in Healthy Treats!</p>
+            <p className="text-green-700 text-sm">
+              Check your email for your {personalityType.name} nutrition guide and prize entry confirmation.
             </p>
           </div>
 
           <div className="space-y-4">
-            <div className="text-center">
-              <p className="text-gray-600 mb-4">
-                Check your email for your complete personalized nutrition guide!
-              </p>
-            </div>
-
             <Button
-              onClick={onRestart}
-              variant="outline"
-              className="w-full text-lg py-6 border-2 border-orange-200 text-orange-700 hover:bg-orange-50 font-heading font-semibold rounded-xl transition-all duration-200"
+              onClick={(e) => {
+                navigator.clipboard.writeText(window.location.origin);
+                (e.target as HTMLElement).textContent = '✅ Link Copied!';
+              }}
+              variant="orange"
+              size="lg"
+              className="w-full text-lg font-body font-semibold"
             >
-              Take Quiz Again
+              📤 Share This Quiz with a Friend
             </Button>
           </div>
 
           <div className="pt-4 border-t border-orange-100">
             <Image
-              src="/alma-logo.png"
+              src="/images/logo.png"
               alt="Alma"
               width={80}
               height={27}

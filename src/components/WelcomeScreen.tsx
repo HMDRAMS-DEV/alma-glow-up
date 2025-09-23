@@ -13,7 +13,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
         <CardHeader className="pb-4">
           <div className="flex justify-center mb-6">
             <Image
-              src="/alma-logo.png"
+              src="/images/logo.png"
               alt="Alma"
               width={120}
               height={40}
@@ -21,7 +21,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
               priority
             />
           </div>
-          <h1 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-2">
             Discover Your Food Personality
           </h1>
           <p className="text-lg md:text-xl text-gray-600 font-body">
@@ -30,31 +30,29 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
         </CardHeader>
 
         <CardContent className="space-y-6">
-          <p className="text-gray-700 text-base md:text-lg leading-relaxed font-body">
+          <p className="text-gray-700 text-base md:text-lg leading-relaxed font-body mb-6">
             Answer a few quick questions and find out the eating style that fits you best.
           </p>
 
-          <div className="space-y-4 text-sm md:text-base text-gray-600 font-body">
-            <div className="flex items-center justify-center space-x-2">
-              <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-              <span>5 quick questions</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-              <span>Personalized macro recommendations</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-              <span>Takes less than 2 minutes</span>
-            </div>
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-xl border border-green-200 mb-6">
+            <p className="text-green-800 font-semibold text-base mb-1">🎁 BONUS: Win $200 in Healthy Treats!</p>
+            <p className="text-green-700 text-sm">
+              Get entered automatically when you complete the quiz
+            </p>
           </div>
 
           <Button
             onClick={onStart}
-            className="w-full text-lg py-6 bg-orange-600 hover:bg-orange-700 text-white font-heading font-semibold rounded-xl shadow-lg transition-all duration-200 transform hover:scale-105"
+            variant="orange"
+            size="lg"
+            className="w-full text-lg font-body font-semibold"
           >
             Start Your Food Personality Quiz
           </Button>
+
+          <p className="text-sm text-gray-500 font-body text-center mt-2">
+            Takes less than 2 minutes
+          </p>
         </CardContent>
       </Card>
     </div>

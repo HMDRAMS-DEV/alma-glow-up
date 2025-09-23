@@ -1,0 +1,154 @@
+<mjml>
+  <mj-head>
+    <mj-title>Your macro blueprint is ready</mj-title>
+    <mj-attributes>
+      <mj-all font-family="'Helvetica Neue', Arial, sans-serif" />
+      <mj-text font-size="16px" color="#33140C" line-height="1.6" />
+      <mj-section background-color="#FFFFFF" />
+    </mj-attributes>
+    <mj-style inline="inline">
+      .macro-number {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .protein { color: #F66A38; }
+      .carbs { color: #B2C200; }
+      .fat { color: #FFBA0A; }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#F7F5ED">
+
+    <!-- Header with cover image -->
+    <mj-section background-color="#F7F5ED" padding="0">
+      <mj-column>
+        <mj-image src="img/cover.jpeg" alt="Alma Food Personality" width="600px" align="center" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Main content card -->
+    <mj-section background-color="transparent" padding="40px 30px">
+      <mj-column>
+
+        <!-- Personality reveal -->
+        <mj-text align="center" font-size="32px" font-weight="bold" color="#33140C" padding-bottom="10px">
+          You're {DATA_VARIABLE:personalityName}!
+        </mj-text>
+
+        <mj-text align="center" font-size="18px" color="#A1A1A1" font-style="italic" padding-bottom="30px">
+          {DATA_VARIABLE:personalityDescription}
+        </mj-text>
+
+        <!-- Macro split section -->
+        <mj-text align="center" font-size="24px" font-weight="bold" color="#33140C" padding-bottom="20px">
+          Your Perfect Macro Split
+        </mj-text>
+
+      </mj-column>
+    </mj-section>
+
+    <!-- Macro cards -->
+    <mj-section background-color="transparent" padding="0 30px 20px 30px">
+      <mj-column width="33.33%">
+        <mj-text align="center" background-color="transparent" padding="20px">
+          <div class="macro-number protein">{DATA_VARIABLE:macroProtein}%</div>
+          <div style="font-size: 14px; color: #A1A1A1;">Protein</div>
+        </mj-text>
+      </mj-column>
+      <mj-column width="33.33%">
+        <mj-text align="center" background-color="transparent" padding="20px">
+          <div class="macro-number carbs">{DATA_VARIABLE:macroCarbs}%</div>
+          <div style="font-size: 14px; color: #A1A1A1;">Carbs</div>
+        </mj-text>
+      </mj-column>
+      <mj-column width="33.33%">
+        <mj-text align="center" background-color="transparent" padding="20px">
+          <div class="macro-number fat">{DATA_VARIABLE:macroFat}%</div>
+          <div style="font-size: 14px; color: #A1A1A1;">Fat</div>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Personality message -->
+    <mj-section background-color="transparent" padding="20px 30px 10px 30px">
+      <mj-column>
+        <mj-text align="center" font-size="22px" font-weight="bold" color="#33140C" padding-bottom="20px">
+          Here's what this means for you:
+        </mj-text>
+
+        <mj-text background-color="#F7F5ED" border-radius="12px" padding="20px" font-style="italic" font-size="16px" line-height="1.7">
+          {DATA_VARIABLE:personalityMessage}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Divider -->
+    <mj-section background-color="transparent" padding="10px 30px">
+      <mj-column>
+        <mj-divider border-color="#E8E8E8" border-width="1px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Reality section -->
+    <mj-section background-color="transparent" padding="20px 30px">
+      <mj-column>
+        <mj-text font-size="18px" font-weight="bold" color="#33140C" padding-bottom="15px">
+          What happens next?
+        </mj-text>
+
+        <mj-text padding-bottom="15px">
+          You have your blueprint. Now Alma coaches you through the daily reality.
+        </mj-text>
+
+        <mj-text padding-bottom="15px">
+          Track your patterns. Get smart alerts. Receive personalized ideas based on your goals and workouts.
+        </mj-text>
+
+        <mj-text padding-bottom="15px">
+          Your personal nutrition coach, always in your pocket.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Divider -->
+    <mj-section background-color="transparent" padding="10px 30px">
+      <mj-column>
+        <mj-divider border-color="#E8E8E8" border-width="1px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- CTA section -->
+    <mj-section background-color="transparent" padding="20px 30px">
+      <mj-column>
+        <mj-text align="center" font-weight="bold" padding-bottom="20px">
+          Ready to see how easy this can be?
+        </mj-text>
+
+        <!-- App Store Download Button -->
+        <mj-image src="img/download.jpg" alt="Download on the App Store" width="200px" href="https://links.alma.food/quiz" align="center" />
+
+      </mj-column>
+    </mj-section>
+
+    <!-- Prize notification -->
+    <mj-section background-color="transparent" padding="20px 30px">
+      <mj-column>
+        <mj-text align="center" font-size="14px" color="#A1A1A1" padding-bottom="10px">
+          <strong>Prize Winner?</strong> We'll contact you via the email address you provided if you're selected.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="transparent" padding="30px">
+      <mj-column>
+        <mj-divider border-color="#E8E8E8" border-width="1px" padding="20px 0" />
+        <mj-text align="center" font-size="14px" color="#A1A1A1">
+          Questions? Just reply to this email - we read every one.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+  </mj-body>
+</mjml>

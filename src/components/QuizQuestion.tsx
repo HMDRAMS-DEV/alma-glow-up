@@ -82,7 +82,9 @@ export default function QuizQuestion({
           <Button
             onClick={handleSubmit}
             disabled={!selectedAnswer}
-            className="w-full text-lg py-6 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-heading font-semibold rounded-xl shadow-lg transition-all duration-200"
+            variant="orange"
+            size="lg"
+            className="w-full text-lg font-body font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {questionNumber === totalQuestions ? 'Finish Quiz' : 'Next Question'}
           </Button>

@@ -1,0 +1,159 @@
+<mjml>
+  <mj-head>
+    <mj-title>Your {DATA_VARIABLE:personalityName} Nutrition Blueprint</mj-title>
+    <mj-attributes>
+      <mj-all font-family="'Helvetica Neue', Arial, sans-serif" />
+      <mj-text font-size="16px" color="#33140C" line-height="1.6" />
+      <mj-section background-color="#FFFFFF" />
+    </mj-attributes>
+    <mj-style inline="inline">
+      .macro-number {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .protein { color: #F66A38; }
+      .carbs { color: #B2C200; }
+      .fat { color: #FFBA0A; }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#F7F5ED">
+
+    <!-- Header with cover image -->
+    <mj-section background-color="#F7F5ED" padding="0">
+      <mj-column>
+        <mj-image src="img/cover.jpeg" alt="Alma Food Personality" width="600px" align="center" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Main content -->
+    <mj-section background-color="#F7F5ED" padding="40px 30px">
+      <mj-column>
+
+        <!-- Personality reveal -->
+        <mj-text align="center" font-size="32px" font-weight="bold" color="#33140C" padding-bottom="10px">
+          You're {DATA_VARIABLE:personalityName}!
+        </mj-text>
+
+        <mj-text align="center" font-size="18px" color="#A1A1A1" font-style="italic" padding-bottom="30px">
+          {DATA_VARIABLE:personalityDescription}
+        </mj-text>
+
+        <!-- Macro split section -->
+        <mj-text align="center" font-size="24px" font-weight="bold" color="#33140C" padding-bottom="20px">
+          Your Perfect Macro Split
+        </mj-text>
+
+      </mj-column>
+    </mj-section>
+
+    <!-- Macro cards -->
+    <mj-section background-color="#F7F5ED" padding="0 30px 20px 30px">
+      <mj-column width="33.33%">
+        <mj-text align="center" background-color="#F9F9F9" border-radius="12px" padding="20px">
+          <div class="macro-number protein">{DATA_VARIABLE:macroProtein}%</div>
+          <div style="font-size: 14px; color: #A1A1A1;">Protein</div>
+        </mj-text>
+      </mj-column>
+      <mj-column width="33.33%">
+        <mj-text align="center" background-color="#F9F9F9" border-radius="12px" padding="20px">
+          <div class="macro-number carbs">{DATA_VARIABLE:macroCarbs}%</div>
+          <div style="font-size: 14px; color: #A1A1A1;">Carbs</div>
+        </mj-text>
+      </mj-column>
+      <mj-column width="33.33%">
+        <mj-text align="center" background-color="#F9F9F9" border-radius="12px" padding="20px">
+          <div class="macro-number fat">{DATA_VARIABLE:macroFat}%</div>
+          <div style="font-size: 14px; color: #A1A1A1;">Fat</div>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Personality message -->
+    <mj-section background-color="#F7F5ED" padding="20px 30px">
+      <mj-column>
+        <mj-text align="center" font-size="22px" font-weight="bold" color="#33140C" padding-bottom="20px">
+          Here's what this means for you:
+        </mj-text>
+
+        <mj-text background-color="#F7F5ED" border-radius="12px" padding="20px" font-style="italic" font-size="16px" line-height="1.7">
+          {DATA_VARIABLE:personalityMessage}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Why this works section -->
+    <mj-section background-color="#F7F5ED" padding="20px 30px">
+      <mj-column>
+        <mj-divider border-color="#E8E8E8" border-width="1px" padding="20px 0" />
+
+        <mj-text font-size="22px" font-weight="bold" color="#33140C" padding-bottom="15px">
+          Why This Actually Works
+        </mj-text>
+
+        <mj-text padding-bottom="15px">
+          Most people fail at nutrition because they try to follow someone else's plan. Your {DATA_VARIABLE:personalityName} approach is different because it matches your psychology:
+        </mj-text>
+
+        <mj-text padding-bottom="5px">✓ <strong>Your macro split</strong> - designed for how you naturally want to eat</mj-text>
+        <mj-text padding-bottom="5px">✓ <strong>Your mindset</strong> - works with your strengths, not against them</mj-text>
+        <mj-text padding-bottom="20px">✓ <strong>Your lifestyle</strong> - fits your schedule and preferences</mj-text>
+
+        <mj-text padding-bottom="25px">
+          The secret isn't willpower or perfection. It's having a system that feels effortless because it's built for you.
+        </mj-text>
+
+        <mj-text font-size="20px" font-weight="bold" color="#33140C" padding-bottom="15px">
+          What Happens Next?
+        </mj-text>
+
+        <mj-text padding-bottom="15px">
+          You now know your ideal macro balance. But knowing and doing are different things.
+        </mj-text>
+
+        <mj-text padding-bottom="15px">
+          <strong>The real question:</strong> How do you turn this knowledge into meals that you actually want to eat, every single day?
+        </mj-text>
+
+        <mj-text padding-bottom="15px">
+          That's where Alma comes in. Your {DATA_VARIABLE:personalityName} meal planning system takes these macros and creates:
+        </mj-text>
+
+        <mj-text padding-bottom="5px">→ <strong>Meals you'll love</strong> (not bland "diet food")</mj-text>
+        <mj-text padding-bottom="5px">→ <strong>Flexible timing</strong> that works with your schedule</mj-text>
+        <mj-text padding-bottom="25px">→ <strong>Smart swaps</strong> for when life gets messy</mj-text>
+
+        <mj-text align="center" font-weight="bold" padding-bottom="20px">
+          Ready to see how easy this can be? Alma is completely free to use.
+        </mj-text>
+
+        <!-- CTA Button with download icon -->
+        <mj-button
+          background-color="#47662E"
+          color="white"
+          font-size="16px"
+          font-weight="600"
+          border-radius="22px"
+          padding="16px 32px"
+          href="https://alma.com"
+        >
+          <img src="template/img/download.svg" alt="" style="width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;" />
+          Download Alma - It's Free
+        </mj-button>
+
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#F7F5ED" padding="30px">
+      <mj-column>
+        <mj-divider border-color="#E8E8E8" border-width="1px" padding="20px 0" />
+        <mj-text align="center" font-size="14px" color="#A1A1A1">
+          Questions? Just reply to this email - we read every one.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+  </mj-body>
+</mjml>
