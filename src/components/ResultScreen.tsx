@@ -21,7 +21,7 @@ export default function ResultScreen({ personalityType, onRestart }: ResultScree
               Great job!
             </h1>
             <p className="text-lg md:text-xl text-gray-600 font-body font-medium">
-              Check your email for your complete personalized nutrition blueprint.
+              Check your email for your ideal macro split.
             </p>
           </div>
         </CardHeader>
