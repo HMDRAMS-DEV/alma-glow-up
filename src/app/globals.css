@@ -44,38 +44,58 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --radius: 1.875rem;
+  /* Alma Colors - matching the example */
+  --alma-primary: #33140C;
+  --alma-primary-inverted: #FFFFFF;
+  --alma-secondary-text: #A1A1A1;
+  --alma-background: #FFFEFC;
+  --alma-secondary-background: #F2F2F2;
+  --alma-teriyaki-cream: #F7F5ED;
+  --alma-nearly-white: #F9F9F9;
+  --alma-ui-border: #E8E8E8;
+  --alma-card-background: #FFFFFF;
+  --alma-shadow-light: rgba(0, 0, 0, 0.08);
+  --alma-shadow-dark: rgba(0, 0, 0, 0.15);
+
+  /* Macros Colors */
+  --alma-macros-yellow: #FFBA0A;
+  --alma-macros-green: #B2C200;
+  --alma-macros-orange: #F66A38;
+  --alma-macros-purple: #7B4AAF;
+
+  /* Updated base colors to use Alma palette */
+  --background: #F7F5ED;
+  --foreground: #33140C;
+  --card: #FFFFFF;
+  --card-foreground: #33140C;
+  --popover: #FFFFFF;
+  --popover-foreground: #33140C;
+  --primary: #33140C;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F2F2F2;
+  --secondary-foreground: #33140C;
+  --muted: #F9F9F9;
+  --muted-foreground: #A1A1A1;
+  --accent: #F2F2F2;
+  --accent-foreground: #33140C;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
+  --border: #E8E8E8;
+  --input: #E8E8E8;
+  --ring: #A1A1A1;
+  --chart-1: #B2C200;
+  --chart-2: #F66A38;
+  --chart-3: #FFBA0A;
+  --chart-4: #7B4AAF;
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #FFFEFC;
+  --sidebar-foreground: #33140C;
+  --sidebar-primary: #33140C;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F2F2F2;
+  --sidebar-accent-foreground: #33140C;
+  --sidebar-border: #E8E8E8;
+  --sidebar-ring: #A1A1A1;
 }
 
 .dark {
