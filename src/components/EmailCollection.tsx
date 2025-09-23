@@ -109,19 +109,17 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
             <div className="w-20 h-20 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
               <span className="text-2xl">{getPersonalityEmoji(personalityType.id)}</span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-2">
+            <h1 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-1">
               You&apos;re {personalityType.name}!
             </h1>
+            <p className="text-gray-700 text-lg font-body leading-relaxed">
+              {personalityType.description}
+            </p>
           </div>
         </CardHeader>
 
         <CardContent className="space-y-8">
-          {/* Personality Description */}
-          <div className="text-center">
-            <p className="text-gray-700 text-lg font-body leading-relaxed mb-4">
-              {personalityType.description}
-            </p>
-          </div>
+          {/* Personality Description moved to header */}
 
           {/* Personality Summary */}
           <div className="bg-orange-50 p-4 rounded-xl">

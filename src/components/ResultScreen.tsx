@@ -27,13 +27,6 @@ export default function ResultScreen({ personalityType, onRestart }: ResultScree
         </CardHeader>
 
         <CardContent className="space-y-6">
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200">
-            <p className="text-green-800 font-semibold text-lg mb-2">🎁 BONUS: Win $200 in Healthy Treats!</p>
-            <p className="text-green-700 text-sm">
-              Check your email for your {personalityType.name} nutrition guide and prize entry confirmation.
-            </p>
-          </div>
-
           <div className="space-y-4">
             <Button
               onClick={(e) => {
@@ -57,7 +50,7 @@ export default function ResultScreen({ personalityType, onRestart }: ResultScree
               className="h-6 w-auto mx-auto mb-2"
             />
             <p className="text-sm text-gray-600 font-body">
-              Personalized nutrition made simple
+              Your nutrition coach is finally here
             </p>
           </div>
         </CardContent>

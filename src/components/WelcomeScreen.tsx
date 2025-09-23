@@ -34,7 +34,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
             Answer a few quick questions and find out the eating style that fits you best.
           </p>
 
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-xl border border-green-200 mb-6">
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-[22px] border border-green-200 mb-6">
             <p className="text-green-800 font-semibold text-base mb-1">🎁 BONUS: Win $200 in Healthy Treats!</p>
             <p className="text-green-700 text-sm">
               Get entered automatically when you complete the quiz
@@ -47,7 +47,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
             size="lg"
             className="w-full text-lg font-body font-semibold"
           >
-            Start Your Food Personality Quiz
+            Start Quiz
           </Button>
 
           <p className="text-sm text-gray-500 font-body text-center mt-2">
