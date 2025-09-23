@@ -118,7 +118,7 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-8">
+        <CardContent className="space-y-6">
           {/* Personality Description moved to header */}
 
           {/* Personality Summary */}
@@ -129,40 +129,38 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
           </div>
 
           {/* Blurred macro balance teaser */}
-          <div className="relative bg-white p-6 rounded-xl border border-gray-200 min-h-[140px] flex flex-col">
+          <div className="relative bg-white p-6 rounded-xl border border-gray-200 min-h-[140px] flex flex-col justify-center">
             <h3 className="text-xl font-heading font-bold text-gray-900 mb-4 text-center">
               Your Ideal Macro Balance
             </h3>
-            <div className="flex-1 flex flex-col justify-center">
-              <div className="grid grid-cols-3 gap-4 blur-sm">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-orange-600 mb-1">
-                    {personalityType.macroSplit.protein}%
-                  </div>
-                  <div className="text-sm font-body font-medium text-gray-600">Protein</div>
+            <div className="grid grid-cols-3 gap-4 blur-sm">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-orange-600 mb-1">
+                  {personalityType.macroSplit.protein}%
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600 mb-1">
-                    {personalityType.macroSplit.carbs}%
-                  </div>
-                  <div className="text-sm font-body font-medium text-gray-600">Carbs</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600 mb-1">
-                    {personalityType.macroSplit.fat}%
-                  </div>
-                  <div className="text-sm font-body font-medium text-gray-600">Fat</div>
-                </div>
+                <div className="text-sm font-body font-medium text-gray-600">Protein</div>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-white px-3 py-1 rounded-full shadow-sm border">
-                  <span className="text-sm font-body font-medium text-gray-600">🔓 Unlock below</span>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-600 mb-1">
+                  {personalityType.macroSplit.carbs}%
                 </div>
+                <div className="text-sm font-body font-medium text-gray-600">Carbs</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-600 mb-1">
+                  {personalityType.macroSplit.fat}%
+                </div>
+                <div className="text-sm font-body font-medium text-gray-600">Fat</div>
+              </div>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="bg-white px-3 py-1 rounded-full shadow-sm border">
+                <span className="text-sm font-body font-medium text-gray-600">🔓 Unlock below</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-8 rounded-2xl border border-green-200 text-center">
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-8 rounded-xl border border-green-200 text-center">
             <div className="text-5xl mb-4">🎁</div>
             <h2 className="text-2xl md:text-3xl font-heading font-bold text-green-800 mb-3">
               Win $200 in Healthy Treats
