@@ -104,12 +104,12 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-orange-50 to-amber-50">
       <Card className="w-full max-w-lg mx-auto text-center shadow-xl">
-        <CardHeader className="pb-4">
-          <div className="mb-6 text-center">
-            <div className="w-20 h-20 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
+        <CardHeader className="pb-6">
+          <div className="mb-8 text-center">
+            <div className="w-20 h-20 mx-auto mb-6 bg-orange-100 rounded-full flex items-center justify-center">
               <span className="text-2xl">{getPersonalityEmoji(personalityType.id)}</span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-1">
+            <h1 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-3">
               You&apos;re {personalityType.name}!
             </h1>
             <p className="text-gray-700 text-lg font-body leading-relaxed">
@@ -118,51 +118,49 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-6">
-          {/* Personality Description moved to header */}
-
+        <CardContent className="space-y-8">
           {/* Personality Summary */}
-          <div className="bg-orange-50 p-4 rounded-xl">
+          <div className="bg-orange-50 p-6 rounded-xl">
             <p className="text-gray-700 text-base font-body leading-relaxed">
               {personalityType.message}
             </p>
           </div>
 
           {/* Blurred macro balance teaser */}
-          <div className="relative bg-white p-6 rounded-xl border border-gray-200 min-h-[140px] flex flex-col justify-center">
-            <h3 className="text-xl font-heading font-bold text-gray-900 mb-4 text-center">
+          <div className="relative bg-white p-8 rounded-xl border border-gray-200 min-h-[160px] flex flex-col justify-center">
+            <h3 className="text-xl font-heading font-bold text-gray-900 mb-6 text-center">
               Your Ideal Macro Balance
             </h3>
-            <div className="grid grid-cols-3 gap-4 blur-sm">
+            <div className="grid grid-cols-3 gap-6 blur-sm">
               <div className="text-center">
-                <div className="text-2xl font-bold text-orange-600 mb-1">
+                <div className="text-2xl font-bold text-orange-600 mb-2">
                   {personalityType.macroSplit.protein}%
                 </div>
                 <div className="text-sm font-body font-medium text-gray-600">Protein</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-green-600 mb-1">
+                <div className="text-2xl font-bold text-green-600 mb-2">
                   {personalityType.macroSplit.carbs}%
                 </div>
                 <div className="text-sm font-body font-medium text-gray-600">Carbs</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600 mb-1">
+                <div className="text-2xl font-bold text-blue-600 mb-2">
                   {personalityType.macroSplit.fat}%
                 </div>
                 <div className="text-sm font-body font-medium text-gray-600">Fat</div>
               </div>
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-white px-3 py-1 rounded-full shadow-sm border">
+              <div className="bg-white px-4 py-2 rounded-full shadow-sm border">
                 <span className="text-sm font-body font-medium text-gray-600">🔓 Unlock below</span>
               </div>
             </div>
           </div>
 
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-8 rounded-xl border border-green-200 text-center">
-            <div className="text-5xl mb-4">🎁</div>
-            <h2 className="text-2xl md:text-3xl font-heading font-bold text-green-800 mb-3">
+            <div className="text-5xl mb-6">🎁</div>
+            <h2 className="text-2xl md:text-3xl font-heading font-bold text-green-800 mb-4">
               Win $200 in Healthy Treats
             </h2>
             <p className="text-green-700 text-lg">
@@ -192,7 +190,7 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
             </Button>
           </form>
 
-          <p className="text-sm text-gray-400 font-body text-center">
+          <p className="text-sm text-gray-400 font-body text-center pt-2">
             No spam. Results delivered instantly.
           </p>
         </CardContent>

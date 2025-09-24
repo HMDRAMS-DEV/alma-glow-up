@@ -37,6 +37,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // First, ensure contact is created/updated in Loops
+    const contactResponse = await fetch('https://app.loops.so/api/v1/contacts/create', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${loopsApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        personalityType: personalityType.id,
+        personalityName: personalityType.name,
+        personalityTitle: personalityType.title,
+        personalityDescription: personalityType.description,
+        macroProtein: personalityType.macroSplit.protein,
+        macroCarbs: personalityType.macroSplit.carbs,
+        macroFat: personalityType.macroSplit.fat,
+        personalityMessage: personalityType.message,
+        source: 'Alma Food Personality Quiz',
+      }),
+    });
+
+    if (!contactResponse.ok) {
+      console.warn('Failed to create contact in Loops:', await contactResponse.text());
+      // Continue with transactional email even if contact creation fails
+    }
+
     // Send transactional email via Loops
     const loopsResponse = await fetch('https://app.loops.so/api/v1/transactional', {
       method: 'POST',
