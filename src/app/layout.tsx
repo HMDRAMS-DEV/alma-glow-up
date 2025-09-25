@@ -6,10 +6,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://quiz.alma.food"),
   title: "Alma Food Personality Quiz",
-  description: "Discover your food personality and ideal macro balance with Alma's personalized nutrition quiz.",
+  description: "Discover your food personality and personalized macro balance with Alma's personalized nutrition quiz.",
   openGraph: {
     title: "Alma Food Personality Quiz",
-    description: "Discover your food personality and ideal macro balance with Alma's personalized nutrition quiz.",
+    description: "Discover your food personality and personalized macro balance with Alma's personalized nutrition quiz.",
     url: "https://quiz.alma.food",
     siteName: "Alma",
     images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Alma Food Personality Quiz",
-    description: "Discover your food personality and ideal macro balance with Alma's personalized nutrition quiz.",
+    description: "Discover your food personality and personalized macro balance with Alma's personalized nutrition quiz.",
     images: ["/favicon.ico"],
   },
   icons: {

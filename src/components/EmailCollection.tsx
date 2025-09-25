@@ -129,7 +129,7 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
           {/* Blurred macro balance teaser */}
           <div className="relative bg-white p-8 rounded-xl border border-gray-200 min-h-[160px] flex flex-col justify-center">
             <h3 className="text-xl font-heading font-bold text-gray-900 mb-6 text-center">
-              Your Ideal Macro Balance
+              Your Personalized Macro Balance
             </h3>
             <div className="grid grid-cols-3 gap-6 blur-sm">
               <div className="text-center">
@@ -153,7 +153,7 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="bg-white px-4 py-2 rounded-full shadow-sm border">
-                <span className="text-sm font-body font-medium text-gray-600">🔓 Unlock below</span>
+                <span className="text-sm font-body font-medium text-gray-600">📧 Enter email below</span>
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-8 rounded-xl border border-green-200 text-center">
             <div className="text-5xl mb-6">🎁</div>
             <h2 className="text-2xl md:text-3xl font-heading font-bold text-green-800 mb-4">
-              Win $200 in Healthy Treats
+              Win $200 Gift Voucher
             </h2>
             <p className="text-green-700 text-lg">
               Automatic entry when you get your results

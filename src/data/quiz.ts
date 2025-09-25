@@ -8,7 +8,7 @@ export const quizQuestions: QuizQuestion[] = [
       { id: 'build-muscle', text: 'Build muscle', weight: 1 },
       { id: 'lose-fat', text: 'Lose fat', weight: 2 },
       { id: 'improve-energy', text: 'Improve energy & focus', weight: 3 },
-      { id: 'maintain-balance', text: 'Maintain balance', weight: 4 }
+      { id: 'have-hyrox-pr', text: 'Have a Hyrox PR', weight: 4 }
     ]
   },
   {

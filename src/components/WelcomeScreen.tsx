@@ -25,7 +25,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
             Discover Your Food Personality
           </h1>
           <p className="text-lg md:text-xl text-gray-600 font-body">
-            (and Ideal Macro Balance)
+            (and Personalized Macro Balance)
           </p>
         </CardHeader>
 
@@ -35,7 +35,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           </p>
 
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-[22px] border border-green-200 mb-6">
-            <p className="text-green-800 font-semibold text-base mb-1">🎁 BONUS: Win $200 in Healthy Treats!</p>
+            <p className="text-green-800 font-semibold text-base mb-1">🎁 BONUS: Win $200 Gift Voucher!</p>
             <p className="text-green-700 text-sm">
               Get entered automatically when you complete the quiz
             </p>
