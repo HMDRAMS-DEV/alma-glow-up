@@ -161,7 +161,7 @@ export default function EmailCollection({ personalityType, onEmailSubmit }: Emai
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-8 rounded-xl border border-green-200 text-center">
             <div className="text-5xl mb-6">🎁</div>
             <h2 className="text-2xl md:text-3xl font-heading font-bold text-green-800 mb-4">
-              Win $200 Gift Voucher
+              Win Exclusive Swag
             </h2>
             <p className="text-green-700 text-lg">
               Automatic entry when you get your results
