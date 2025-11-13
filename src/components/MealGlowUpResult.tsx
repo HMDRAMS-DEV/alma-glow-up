@@ -83,24 +83,67 @@ export default function MealGlowUpResult({
     });
   };
 
-  const handleSaveImage = async () => {
-    if (!watermarkedImageUrl) return;
+  const createWatermarkedBlob = async (): Promise<Blob> => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Could not get canvas context');
 
+    // Load the original transformed image (not the preview)
+    const response = await fetch(transformedImage);
+    const blob = await response.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const img = await loadImage(blobUrl);
+
+    // Set canvas to actual image dimensions
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Draw the main image
+    ctx.drawImage(img, 0, 0);
+
+    // Load and draw watermark
+    const watermark = await loadImage('/images/watermark.png');
+    const watermarkHeight = img.height * 0.08;
+    const watermarkWidth = (watermark.width / watermark.height) * watermarkHeight;
+    const paddingX = img.width * 0.04;
+    const paddingY = img.height * 0.04;
+
+    ctx.globalAlpha = 0.85;
+    ctx.drawImage(
+      watermark,
+      img.width - watermarkWidth - paddingX,
+      img.height - watermarkHeight - paddingY,
+      watermarkWidth,
+      watermarkHeight
+    );
+
+    // Clean up
+    URL.revokeObjectURL(blobUrl);
+
+    // Return as blob
+    return new Promise((resolve, reject) => {
+      canvas.toBlob((blob) => {
+        if (blob) resolve(blob);
+        else reject(new Error('Failed to create blob'));
+      }, 'image/jpeg', 0.95);
+    });
+  };
+
+  const handleSaveImage = async () => {
     try {
-      // Convert data URL to blob
-      const response = await fetch(watermarkedImageUrl);
-      const blob = await response.blob();
+      // Show hint for iOS users
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      if (isIOS) {
+        setShowSaveHint(true);
+        setTimeout(() => setShowSaveHint(false), 4000);
+      }
+
+      // Create watermarked blob from original full-res image
+      const blob = await createWatermarkedBlob();
       const file = new File([blob], 'meal-glow-up.jpg', { type: 'image/jpeg' });
 
       // On mobile, always use share API (iOS Safari, Android Chrome)
       if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-        // Show hint for iOS users
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-        if (isIOS) {
-          setShowSaveHint(true);
-          setTimeout(() => setShowSaveHint(false), 4000);
-        }
-
         await navigator.share({
           files: [file],
           title: 'Meal Glow Up'
@@ -195,11 +238,9 @@ export default function MealGlowUpResult({
 
             <Button
               onClick={async () => {
-                if (!watermarkedImageUrl) return;
-
                 try {
-                  const response = await fetch(watermarkedImageUrl);
-                  const blob = await response.blob();
+                  // Create watermarked blob from original full-res image
+                  const blob = await createWatermarkedBlob();
                   const file = new File([blob], 'meal-glow-up.jpg', { type: 'image/jpeg' });
 
                   if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
