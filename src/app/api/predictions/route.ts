@@ -21,15 +21,22 @@ export async function POST(request: Request) {
 
   const { imageUrl } = await request.json();
 
-  const options = {
+  const options: {
+    model: string;
+    input: {
+      prompt: string;
+      input_image: string;
+      output_format: "jpg";
+    };
+    webhook?: string;
+    webhook_events_filter?: ("start" | "completed")[];
+  } = {
     model: 'black-forest-labs/flux-kontext-pro',
     input: {
       prompt: MEAL_GLOW_UP_PROMPT,
       input_image: imageUrl,
-      output_format: "jpg" as const
-    },
-    webhook: undefined as string | undefined,
-    webhook_events_filter: undefined as string[] | undefined
+      output_format: "jpg"
+    }
   }
 
   if (WEBHOOK_HOST) {
