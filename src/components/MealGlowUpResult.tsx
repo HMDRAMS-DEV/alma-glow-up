@@ -16,14 +16,13 @@ export default function MealGlowUpResult({
   transformedImage,
   onTryAnother
 }: MealGlowUpResultProps) {
-  const [showComparison, setShowComparison] = useState(true);
   const [watermarkedImageUrl, setWatermarkedImageUrl] = useState<string | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [showSaveHint, setShowSaveHint] = useState(false);
 
   // Generate watermarked image on mount
   useEffect(() => {
     createWatermarkedImage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transformedImage]);
 
   const createWatermarkedImage = async () => {
@@ -180,7 +179,7 @@ export default function MealGlowUpResult({
           <div className="space-y-3">
             {showSaveHint && (
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800 font-body">
-                💡 Tap "Save Image" in the share menu to add to Photos
+                💡 Tap &quot;Save Image&quot; in the share menu to add to Photos
               </div>
             )}
 
