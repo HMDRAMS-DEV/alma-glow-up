@@ -1,5 +1,5 @@
-import Quiz from '@/components/Quiz';
+import MealGlowUp from '@/components/MealGlowUp';
 
 export default function Home() {
-  return <Quiz />;
+  return <MealGlowUp />;
 }
