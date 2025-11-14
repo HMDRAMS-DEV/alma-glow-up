@@ -4,41 +4,43 @@
  * Edit these prompts to customize how meals are transformed
  */
 
-export const MEAL_GLOW_UP_PROMPT = `Transform this meal into a show-stopping Bon Appétit magazine cover-worthy dish. This is a creative culinary transformation, not just a photo enhancement.
+export const MEAL_GLOW_UP_PROMPT = `Transform this meal into a stunning Bon Appétit magazine cover-worthy gourmet dish. This is a creative culinary elevation that MUST preserve and prominently showcase EVERY ingredient visible in the original photo.
 
-STEP 1 - IDENTIFY & REIMAGINE:
-Identify the core ingredients and main dish type. Then reimagine it as an elevated gourmet version: enhance flavors through creative plating, add sophisticated elements (premium garnishes, architectural composition, luxurious sauces, edible flowers, microgreens, gold leaf accents if appropriate), and present it as a chef's signature creation.
+CRITICAL REQUIREMENT - INGREDIENT PRESERVATION:
+- IDENTIFY EVERY INGREDIENT: List and recognize all ingredients visible in the original photo
+- PRESERVE ALL INGREDIENTS: Every single ingredient must remain visible and recognizable in the transformed image
+- SHOWCASE EACH INGREDIENT: Each ingredient should be elevated, refined, and showcased beautifully - not hidden or removed
+- NO SUBSTITUTIONS: Do not replace ingredients with different ones; only enhance what's already there
+- INGREDIENT VISIBILITY: Make sure viewers can clearly identify each original ingredient in the gourmet version
 
-STEP 2 - CREATIVE PLATING & PRESENTATION:
-- Transform the plating into fine dining artistry: use negative space strategically, create geometric or organic arrangements
-- Add gourmet touches: edible flowers, microgreens, herb oil drizzles, micro-salt crystals, sauce swooshes
-- Elevate the presentation with premium elements (saffron threads, edible gold, premium greens, artisanal garnishes)
-- Consider the color harmony and create visual contrast with vibrant fresh ingredients
+STEP 1 - IDENTIFY & ELEVATE:
+Carefully identify every ingredient in the dish. Then transform the plating to showcase each ingredient as a gourmet component: arrange them with precision, enhance their natural colors and textures, and present them as refined elements of a chef-crafted creation. Each ingredient should look more appetizing, refined, and premium than the original.
+
+STEP 2 - GOURMET PLATING WITH INGREDIENT FOCUS:
+- Arrange all ingredients in a refined, intentional composition that highlights their individual beauty
+- Enhance the quality of each ingredient: make vegetables crisper, proteins glossier, sauces more refined
+- Add complementary gourmet touches around the main ingredients: micro-garnishes, herb oils, artisanal accents
+- Use negative space to elegantly separate and showcase individual ingredients
+- Create color harmony that makes every ingredient pop: vibrant greens, rich sauces, golden-brown proteins, etc.
+- Every ingredient from the original must be distinguishable in the final image
 
 STEP 3 - PROFESSIONAL FOOD PHOTOGRAPHY:
-- Shot style: Bon Appétit editorial photography - dynamic, inspiring, appetite-inducing
-- Lighting: Warm directional side-window lighting with subtle golden highlights, creating depth and dimension
-- Perspective: 30-45° angle or overhead hero shot depending on dish shape, with confident composition
-- Depth of field: Shallow DOF (f/2.8-f/4) isolating the hero dish with softly blurred premium plating background
-- Camera simulation: 85mm lens equivalent, crisp focus, warm color temperature (3200-4500K), minimal noise
+- Shot style: Bon Appétit editorial photography - magazine-cover worthy, dynamic, crave-inducing
+- Lighting: Warm directional side-window lighting emphasizing texture and dimension of each ingredient
+- Perspective: 30-45° angle or overhead hero shot that best showcases all ingredients clearly
+- Depth of field: Shallow DOF (f/2.8-f/4) with all main ingredients in crisp focus
+- Camera simulation: 85mm lens equivalent, warm color temperature (3200-4500K), low noise
 
-STEP 4 - STYLING & ATMOSPHERE:
-- Background: Luxury surface (marble, slate, linen) or curated fine dining environment
-- Props: Minimal, refined - maybe a linen napkin, fine china edge, or wine glass hint
-- Texture details: Emphasize glossy glazes, crisp textures, fresh herb detail, sauce reflections, steam wisps
-- Color palette: Rich, sophisticated, with warm ambient tones that make the food irresistible
+STEP 4 - STYLING & PREMIUM PRESENTATION:
+- Background: Luxury surface (marble, slate, premium linen) or elegant fine dining environment
+- Props: Minimal and refined - don't distract from the beautifully plated ingredients
+- Texture details: Emphasize the surface quality of each ingredient - glossy proteins, crisp vegetables, fresh herbs
+- Premium touches: Add refined garnishes that complement the original ingredients (microgreens, herb oil, premium salts)
 
-STEP 5 - FINAL POLISH:
-- Ensure photorealistic quality with true-to-life food textures and believable plating
-- Add subtle atmospheric effects: soft focus backgrounds, warm light reflection, premium feel
-- Create an image that would make someone want to immediately order or recreate this dish
-- Professional restaurant photography standard with editorial magazine quality
+STEP 5 - FINAL EXECUTION:
+- Ensure every ingredient from the original is still clearly visible and identifiable
+- Make the image magazine-cover worthy and instantly crave-inducing
+- Professional restaurant photography standard with editorial quality
+- The transformation should say: "This is elevated, refined, and delicious" - not "This is a completely different dish"
 
-KEY CREATIVE FREEDOMS: You have full creative liberty to:
-- Add sophisticated plating elements beyond the original
-- Enhance ingredients with gourmet alternatives or premium presentation
-- Create new sauce presentations or garnish arrangements
-- Transform simple meals into chef-crafted creations
-- Make it magazine-cover worthy and utterly crave-inducing
-
-The goal: Make this dish look like it just came out of a Michelin-starred kitchen and belongs on a magazine cover.`;
+The goal: Make this dish look like it came straight from a Michelin-starred kitchen, where every ingredient is honored, refined, and beautifully presented on a magazine cover.`;
