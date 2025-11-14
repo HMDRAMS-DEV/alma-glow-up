@@ -22,10 +22,12 @@ export default function ImageUpload({ onImageSelect }: ImageUploadProps) {
 
     setIsLoading(true);
 
-    // Create preview
+    // Create preview and compress
     const reader = new FileReader();
-    reader.onload = (e) => {
-      setPreview(e.target?.result as string);
+    reader.onload = async (e) => {
+      const originalDataUrl = e.target?.result as string;
+      const compressedDataUrl = await compressImage(originalDataUrl);
+      setPreview(compressedDataUrl);
       setIsLoading(false);
     };
     reader.readAsDataURL(file);
@@ -37,6 +39,49 @@ export default function ImageUpload({ onImageSelect }: ImageUploadProps) {
       reader.readAsDataURL(file);
       reader.onload = () => resolve(reader.result as string);
       reader.onerror = error => reject(error);
+    });
+  };
+
+  const compressImage = (dataUrl: string, maxWidth: number = 1200, maxHeight: number = 1200, quality: number = 0.7): Promise<string> => {
+    return new Promise((resolve) => {
+      if (typeof window === 'undefined') {
+        resolve(dataUrl);
+        return;
+      }
+
+      const img = document.createElement('img') as HTMLImageElement;
+      img.src = dataUrl;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        // Calculate new dimensions maintaining aspect ratio
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+          resolve(compressedDataUrl);
+        } else {
+          resolve(dataUrl);
+        }
+      };
+      img.onerror = () => resolve(dataUrl);
     });
   };
 
@@ -56,7 +101,7 @@ export default function ImageUpload({ onImageSelect }: ImageUploadProps) {
     }
   };
 
-  const capturePhoto = () => {
+  const capturePhoto = async () => {
     if (!videoRef.current) return;
 
     const canvas = document.createElement('canvas');
@@ -67,7 +112,10 @@ export default function ImageUpload({ onImageSelect }: ImageUploadProps) {
     if (ctx) {
       ctx.drawImage(videoRef.current, 0, 0);
       const imageData = canvas.toDataURL('image/jpeg');
-      setPreview(imageData);
+
+      // Compress the captured image
+      const compressedImageData = await compressImage(imageData);
+      setPreview(compressedImageData);
 
       // Stop camera
       const stream = videoRef.current.srcObject as MediaStream;
